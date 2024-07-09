@@ -9,12 +9,28 @@ Vue.createApp({
         password: "",
       },
       currentUser: null,
-      newQuiz: {
+      newQuote: {
         title: "",
         description: "",
-        questions: [],
+        status: "",
+        totalAmount: "",
+        createdAt: "",
+        items: [],
+        comments: ""
       },
-     
+      newComment: {
+        item: "",
+        comment: "",
+      },
+      newItem: [{
+        title:"",
+        description:"",
+        quantity:"",
+        unitPrice:"",
+        totalPrice:"",
+      }],
+      editingQuote: false,
+      quotes:[],
     };
   },
   methods: {
@@ -87,8 +103,108 @@ Vue.createApp({
         this.currentUser = null;
       }
     },
+    //used create quiz on kahoot as reference
+    //currently working on this one may have issues
+    createQuote: async function () {
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
 
-    
+      this.newQuote.items = this.newItem;
+
+      let requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: JSON.stringify(this.newQuote),
+      };
+      //make changes here
+      let response = await fetch(`${URL}/quizzes`, requestOptions);
+      if (response.status === 201) {
+        this.getQuotes();
+        this.currentPage = "quizzes";
+        this.clearQuote();
+        console.log("successfully created a quote");
+      } else {
+        console.log("failed to create a quote");
+      }
+    },
+    //
+    getQuotes: async function () {
+      let response = await fetch(`${URL}/quotes`);
+      let data = await response.json();
+      this.quotes = data;
+      console.log(data);
+    },
+    //should be good
+    clearQuote: function () {
+      this.newQuote = {
+        title: "",
+        description: "",
+        status: "",
+        totalAmount: "",
+        createdAt: "",
+        items: [],
+        comments: ""
+      };
+      this.newItem = [
+        {
+          title:"",
+          description:"",
+          quantity:"",
+          unitPrice:"",
+          totalPrice:"",  
+        },
+      ];
+      this.newComment = {
+          item: "",
+          comment: "",
+
+      };
+      
+      this.editingQuote = false;
+    },
+    //quotes id quote quizzes
+    deleteQuote: async function (quizId) {
+      let requestOptions = {
+        method: "DELETE",
+      };
+
+      let response = await fetch(`${URL}/quizzes/${quizId}`, requestOptions);
+      if (response.status === 204) {
+        this.getQuotes();
+      }
+    },
+
+    editQuote: function (quiz) {
+      this.newQuiz = quiz;
+      this.newQuestions = quiz.questions;
+      this.currentPage = "createQuiz";
+      this.editingQuiz = true;
+    },
+
+    saveQuote: async function () {
+      let myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      this.newQuote.items = this.newItem;
+
+      let requestOptions = {
+        method: "PUT",
+        header: myHeaders,
+        body: JSON.stringify(this.newQuote),
+      };
+
+      let response = await fetch(
+        `${URL}/quizzes/${this.newQuiz._id}`,
+        requestOptions
+      );
+      if (response.status === 204) {
+        this.getQuotes();
+        this.clearQuote();
+        this.currentPage = "quizzes";
+      } else {
+        console.log("failed to update quote");
+      }
+    },
 
 
     
