@@ -43,7 +43,7 @@
               <div class="gap"></div>
               <div class="buttons">
                 <p>
-                  <span @click="setPage('viewQuote')">
+                  <span @click="setPage('findQuote')">
                     <v-btn variant="outlined" rounded="lg" v-ripple
                       >View Quote</v-btn
                     ></span
@@ -92,7 +92,7 @@
               <div class="gap"></div>
               <div class="buttons">
                 <p>
-                  <span @click="setPage('viewQuote')">
+                  <span @click="setPage('findQuote')">
                     <v-btn variant="outlined" rounded="lg" v-ripple
                       >View Quote</v-btn
                     ></span
@@ -109,7 +109,49 @@
               
             </form>
           </div>
-          <div v-if="currentPage === 'checkQuote'"></div>
+
+          <!-- FIND QUOTE -->
+          <div v-if="currentPage === 'findQuote'">
+            <v-form fast-fail @submit.prevent="customerQuote()">
+                <h3>Find a Quote</h3>
+              <div class="input-container">
+                <v-text-field
+                  v-model="user.quote"
+                  :rules="rules"
+                  label="Quote Number"
+                ></v-text-field>
+              </div>
+              <div class="submit">
+                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large">Find Quote</v-btn>
+              </div>
+              <div class="gap"></div>
+              <div class="buttons">
+                <p>
+                  <span @click="setPage('login')"
+                    ><v-btn variant="outlined" rounded="lg" v-ripple
+                      >Back</v-btn
+                    ></span
+                  >
+                </p>
+              </div>
+            </form>
+          </div>
+
+          <!-- CUSTOMER QUOTE -->
+           <div v-if="currentPage === 'customerQuote'"></div>
+
+          <!-- HOME PAGE -->
+          <div v-if="currentPage === 'home'">
+            <nav>
+              <h1>QuoteTracker</h1>
+              <p v-if="currentUser">Welcome, {{currentUser.name}}</p>
+              <button
+                v-if="currentUser"
+                @click="deleteSession()">
+                Logout
+              </button>
+            </nav>
+          </div>
         </v-main>
       </v-app>
     </div>
