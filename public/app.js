@@ -2,7 +2,7 @@ const URL = "http://localhost:8080";
 Vue.createApp({
   data() {
     return {
-      currentPage: "loading",
+      currentPage: "login",
       user: {
         name: "",
         email: "",
@@ -14,7 +14,15 @@ Vue.createApp({
         description: "",
         questions: [],
       },
-     
+
+      // vuetify rules //
+      companyNameRules: [
+        (value) => {
+          if (value?.length > 3) return true;
+
+          return "First name must be at least 3 characters.";
+        },
+      ],
     };
   },
   methods: {
@@ -87,14 +95,11 @@ Vue.createApp({
         this.currentUser = null;
       }
     },
-
-    
-
-
-    
   },
   created: function () {
     console.log("created");
     this.getSession();
   },
-}).mount("#app");
+})
+  .use(Vuetify.createVuetify())
+  .mount("#app");

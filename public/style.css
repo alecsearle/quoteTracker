@@ -1,1 +1,37 @@
+:root {
+  --mainBlue: #1f7aab;
+}
 
+/* Login & Register Page */
+form {
+  padding-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  width: 300px;
+  color: var(--mainBlue);
+}
+h3 {
+  color: var(--mainBlue);
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}
+.input-container {
+  width: 350px;
+}
+.submit .v-btn {
+  width: 350px;
+  gap: 1rem;
+  color: var(--mainBlue);
+}
+.gap {
+  height: 1rem;
+}

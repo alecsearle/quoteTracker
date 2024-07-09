@@ -1,42 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
-	<head>
-		<meta charset="UTF-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0" />
-		<title>Quote Tracker</title>
-		<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-		<link
-			rel="stylesheet"
-			href="style.css" />
-	</head>
-	<body>
-		<div id="app"></div>
-		<script src="app.js"></script>
-	</body>
-=======
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <!-- <link
+    <link rel="stylesheet" href="style.css" />
+    <link
       rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-    /> -->
-    <!-- pico css -->
+      href="https://cdn.jsdelivr.net/npm/vuetify@3.6.11/dist/vuetify.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.6.11/dist/vuetify.min.js"></script>
     <title>Quote Tracker</title>
   </head>
   <body>
     <div id="app">
+      <v-app>
+        <v-main>
+          <div v-if="currentPage === 'loading'"></div>
+          <!-- LOGIN -->
+          <div v-if="currentPage === 'login'" class="login">
+            <v-form fast-fail @submit.prevent="loginUser()">
+              <h3>Login</h3>
+              <div class="input-container">
+                <v-text-field
+                  v-model="user.email"
+                  :rules="rules"
+                  label="Email"
+                ></v-text-field>
+              </div>
+              <div class="input-container">
+                <v-text-field
+                  v-model="user.password"
+                  :rules="rules"
+                  label="Password"
+                  type="password"
+                ></v-text-field>
+              </div>
+              <div class="submit">
+                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large"
+                >Login</v-btn>
+              </div>
+              <div class="gap"></div>
+              <div class="buttons">
+                <p>
+                  <span @click="setPage('viewQuote')">
+                    <v-btn variant="outlined" rounded="lg" v-ripple
+                      >View Quote</v-btn
+                    ></span
+                  >
+                </p>
+                <p>
+                  <span @click="setPage('register')"
+                    ><v-btn variant="outlined" rounded="lg" v-ripple
+                      >Register Buisness</v-btn
+                    ></span
+                  >
+                </p>
+              </div>
+            </v-form>
+          </div>
 
-
-     <div v-if="currentPage === 'loading'"></div>
+          <!-- REGISTER -->
+          <div v-if="currentPage === 'register'">
+              <v-form fast-fail @submit.prevent="register()">
+                <h3>Register</h3>
+              <div class="input-container">
+                <v-text-field
+                  v-model="user.companyName"
+                  :rules="companyNameRules"
+                  label="Company Name"
+                ></v-text-field>
+              </div>
+              <div class="input-container">
+                <v-text-field
+                  v-model="user.email"
+                  :rules="rules"
+                  label="Email"
+                ></v-text-field>
+              </div>
+              <div class="input-container">
+                <v-text-field
+                  v-model="user.password"
+                  :rules="rules"
+                  label="Password"
+                  type="password"
+                ></v-text-field>
+              </div>
+              <div class="submit">
+                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large">Register</v-btn>
+              </div>
+              <div class="gap"></div>
+              <div class="buttons">
+                <p>
+                  <span @click="setPage('viewQuote')">
+                    <v-btn variant="outlined" rounded="lg" v-ripple
+                      >View Quote</v-btn
+                    ></span
+                  >
+                </p>
+                <p>
+                  <span @click="setPage('login')"
+                    ><v-btn variant="outlined" rounded="lg" v-ripple
+                      >Login</v-btn
+                    ></span
+                  >
+                </p>
+              </div>
+              
+            </form>
+          </div>
+          <div v-if="currentPage === 'checkQuote'"></div>
+        </v-main>
+      </v-app>
     </div>
 
     <script src="app.js"></script>
   </body>
->>>>>>> d25a62192223c3a2c27370cebf5a868d97752d28
 </html>
