@@ -1,2 +1,2 @@
-# quoteTracker
+quoteTracker
 Track business quotes
