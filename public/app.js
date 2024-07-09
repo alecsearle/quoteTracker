@@ -2,18 +2,37 @@ const URL = "http://localhost:8080";
 Vue.createApp({
   data() {
     return {
-      currentPage: "login",
+      currentPage: "loading",
       user: {
         name: "",
         email: "",
         password: "",
       },
       currentUser: null,
-      newQuiz: {
+      newQuote: {
         title: "",
         description: "",
-        questions: [],
+        status: "",
+        totalAmount: "",
+        createdAt: "",
+        items: [],
+        comments: "",
       },
+      newComment: {
+        item: "",
+        comment: "",
+      },
+      newItem: [
+        {
+          title: "",
+          description: "",
+          quantity: "",
+          unitPrice: "",
+          totalPrice: "",
+        },
+      ],
+      editingQuote: false,
+      quotes: [],
 
       // vuetify rules //
       companyNameRules: [
