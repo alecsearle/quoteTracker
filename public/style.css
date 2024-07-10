@@ -1,5 +1,11 @@
 :root {
   --mainBlue: #1f7aab;
+  --hover: #1f7aab;
+}
+
+body {
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 /* Login & Register Page */
@@ -35,4 +41,21 @@ h3 {
 }
 .gap {
   height: 1rem;
+}
+
+/* NAV BAR */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-selectors {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-button:hover {
+  background-color: var(--hover);
 }

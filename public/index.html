@@ -66,7 +66,7 @@
                 <h3>Register</h3>
               <div class="input-container">
                 <v-text-field
-                  v-model="user.companyName"
+                  v-model="user.name"
                   :rules="companyNameRules"
                   label="Company Name"
                 ></v-text-field>
@@ -137,21 +137,51 @@
             </form>
           </div>
 
+          <!-- NAV BAR -->
+           <nav v-if="currentPage !== 'login' && currentPage !=='register' && currentPage !=='findQuote'">
+              <h1 @click="setPage('home')">QuoteTracker</h1>
+              <!-- <p v-if="currentUser">Welcome, {{currentUser.name}}</p> -->
+                <div class="nav-selectors">
+                    <v-btn @click="setPage('home')" class="nav-button" variant="tonal" rounded="lg" v-ripple size="x-large">HOME</v-btn>
+                    <v-btn @click="setPage('quotes')" class="nav-button" variant="tonal" rounded="lg" v-ripple size="x-large">QUOTES</v-btn>
+                    <v-btn @click="setPage('stats')" class="nav-button" variant="tonal" rounded="lg" v-ripple size="x-large">COMPANY STATS</v-btn>
+                  
+                </div>
+               <v-btn variant="tonal" rounded="lg" v-ripple size="x-large" class="nav-button">PROFILE</v-btn>
+              <!-- <button
+                v-if="currentUser"
+                @click="deleteSession()"
+                >
+                Logout
+              </button> -->
+            </nav>
+
           <!-- CUSTOMER QUOTE -->
            <div v-if="currentPage === 'customerQuote'"></div>
-
+            
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
-            <nav>
-              <h1>QuoteTracker</h1>
-              <p v-if="currentUser">Welcome, {{currentUser.name}}</p>
-              <button
-                v-if="currentUser"
-                @click="deleteSession()">
-                Logout
-              </button>
-            </nav>
+            
+            <h1>New Quote +</h1>
+            <h3>Recent Quotes</h3>
           </div>
+
+          <!-- QUOTES PAGE -->
+          <div v-if="currentPage === 'quotes'">
+            <h1>ALL QUOTES</h1>
+            <div id="search-bar">
+              <input
+                type="text"
+                placeholder="Search..."
+                v-model="searchInput" />
+              <p id="clear-search">X</p>
+            </div>
+          </div>
+
+          <!-- COMPANY STATS -->
+           <div v-if="currentPage === 'stats'">
+            <h1>COMPANY STATS</h1>
+           </div>
         </v-main>
       </v-app>
     </div>
