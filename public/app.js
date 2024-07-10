@@ -135,8 +135,8 @@ Vue.createApp({
           email: "",
           password: "",
         };
-        this.getQuizzes();
-        this.currentPage = "quizzes";
+        this.getQuotes();
+        this.currentPage = "home";
       } else {
         console.log("failed to log in");
       }
@@ -148,7 +148,7 @@ Vue.createApp({
         let data = await response.json();
         this.currentUser = data;
         this.getQuizzes();
-        this.currentPage = "quizzes";
+        this.currentPage = "home";
       } else {
         this.currentPage = "login";
       }
@@ -175,10 +175,10 @@ Vue.createApp({
         body: JSON.stringify(this.newQuote),
       };
       //make changes here
-      let response = await fetch(`${URL}/quizzes`, requestOptions);
+      let response = await fetch(`${URL}/quotes`, requestOptions);
       if (response.status === 201) {
         this.getQuotes();
-        this.currentPage = "quizzes";
+        this.currentPage = "home";
         this.clearQuote();
         console.log("successfully created a quote");
       } else {
@@ -220,17 +220,17 @@ Vue.createApp({
       this.editingQuote = false;
     },
     //quotes id quote quizzes
-    deleteQuote: async function (quizId) {
+    deleteQuote: async function (quoteId) {
       let requestOptions = {
         method: "DELETE",
       };
 
-      let response = await fetch(`${URL}/quizzes/${quizId}`, requestOptions);
+      let response = await fetch(`${URL}/quizzes/${quoteId}`, requestOptions);
       if (response.status === 204) {
         this.getQuotes();
       }
     },
-
+//make changes here
     editQuote: function (quiz) {
       this.newQuiz = quiz;
       this.newQuestions = quiz.questions;
@@ -251,13 +251,13 @@ Vue.createApp({
       };
 
       let response = await fetch(
-        `${URL}/quizzes/${this.newQuiz._id}`,
+        `${URL}/quotes/${this.newQuote._id}`,
         requestOptions
       );
       if (response.status === 204) {
         this.getQuotes();
         this.clearQuote();
-        this.currentPage = "quizzes";
+        this.currentPage = "home";
       } else {
         console.log("failed to update quote");
       }
