@@ -2,7 +2,7 @@ const URL = "http://localhost:8080";
 Vue.createApp({
   data() {
     return {
-      currentPage: "findQuote",
+      currentPage: "home",
       user: {
         name: "",
         email: "",
@@ -32,7 +32,56 @@ Vue.createApp({
         },
       ],
       editingQuote: false,
-      quotes: [],
+      quotes: [
+        {
+          title: "Sauls House",
+          description: "Filthy house needs everything done",
+          status: "in-progress",
+          totalAmount: "10g's",
+          createdAt: "9:00",
+          items: [
+            {
+              title: "vaccum",
+              description: "sucks stuff",
+              quantity: "4",
+              unitPrice: "250",
+              totalPrice: "1000",
+            },
+            {
+              title: "bleach",
+              description: "clean",
+              quantity: "3",
+              unitPrice: "10",
+              totalPrice: "30",
+            },
+          ],
+          comments: "QUOTE",
+        },
+        {
+          title: "Sauls House",
+          description: "Filthy house needs everything done",
+          status: "in-progress",
+          totalAmount: "10g's",
+          createdAt: "9:00",
+          items: [
+            {
+              title: "vaccum",
+              description: "sucks stuff",
+              quantity: "4",
+              unitPrice: "250",
+              totalPrice: "1000",
+            },
+            {
+              title: "bleach",
+              description: "clean",
+              quantity: "3",
+              unitPrice: "10",
+              totalPrice: "30",
+            },
+          ],
+          comments: "QUOTE",
+        },
+      ],
 
       // vuetify rules //
       companyNameRules: [
@@ -118,7 +167,6 @@ Vue.createApp({
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
-
       this.newQuote.items = this.newItem;
 
       let requestOptions = {
@@ -153,21 +201,20 @@ Vue.createApp({
         totalAmount: "",
         createdAt: "",
         items: [],
-        comments: ""
+        comments: "",
       };
       this.newItem = [
         {
-          title:"",
-          description:"",
-          quantity:"",
-          unitPrice:"",
-          totalPrice:"",  
+          title: "",
+          description: "",
+          quantity: "",
+          unitPrice: "",
+          totalPrice: "",
         },
       ];
       this.newComment = {
-          item: "",
-          comment: "",
-
+        item: "",
+        comment: "",
       };
 
       this.editingQuote = false;
@@ -235,7 +282,7 @@ Vue.createApp({
       });
     },
   },
-  
+
   created: function () {
     console.log("created");
     this.getSession();

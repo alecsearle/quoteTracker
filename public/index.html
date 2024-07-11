@@ -164,6 +164,36 @@
             
             <h1>New Quote +</h1>
             <h3>Recent Quotes</h3>
+
+            <div
+              v-for="quote in quotes">
+              <h3>{{quote.title}}</h3>
+              <p>{{quote.description}}</p>
+              <p>{{quote.status}}</p>
+              <p>{{quote.totalAmount}}</p>
+              <p>{{quote.createdAt}}</p>
+              <div v-for="item in items">
+                <h4>{{item.title}}</h4>
+                <p>{{item.description}}</p>
+                <p>{{item.quantity}}</p>
+                <p>{{item.unitPrice}}</p>
+                <p>{{item.totalPrice}}</p>
+              </div>
+              <p>{{quote.comments}}</p>
+              <!-- <div class="edit_delete">
+                <button
+                  v-if="quote.owner === currentUser.userID"
+                  @click.stop="editQuote(quote)">
+                  Edit
+                </button>
+                <button
+                  v-if="quote.owner === currentUser.userID"
+                  @click.stop="deleteQuote(quote._id)"
+                  id="delete_button">
+                  Delete
+                </button>
+              </div> -->
+            </div>
           </div>
 
           <!-- QUOTES PAGE -->
