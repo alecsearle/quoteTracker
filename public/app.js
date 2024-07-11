@@ -10,6 +10,12 @@ Vue.createApp({
       },
       currentUser: null,
       newQuote: {
+        customerInfo: {
+          name: "",
+          phoneNumber: "",
+          email: "",
+          address: "",
+        },
         title: "",
         description: "",
         status: "",
@@ -22,7 +28,7 @@ Vue.createApp({
         item: "",
         comment: "",
       },
-      newItem: [
+      newItems: [
         {
           title: "",
           description: "",
@@ -47,6 +53,20 @@ Vue.createApp({
   methods: {
     setPage: function (page) {
       this.currentPage = page;
+    },
+
+    createItem: function () {
+      this.newItems.push({
+        title: "",
+        description: "",
+        quantity: "",
+        unitPrice: "",
+        totalPrice: "",
+      });
+    },
+
+    deleteItem: function (index) {
+      this.newItems.splice(index, 1);
     },
 
     registerUser: async function () {

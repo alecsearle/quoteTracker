@@ -264,28 +264,92 @@
           <!-- NEW QUOTE -->
           <div v-if="currentPage === 'newQuote'">
             <div class="form">
-              <v-form fast-fail @submit.prevent="registerUser()">
+              <v-form fast-fail @submit.prevent="createQuote()">
                 <h3>New Quote</h3>
                 <div class="input-container">
                   <v-text-field
-                    v-model="user.companyName"
-                    :rules="companyNameRules"
-                    label="Company Name"
+                    v-model="newQuote.title"
+                    :rules="rules"
+                    label="Quote Title"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
-                    v-model="user.email"
+                    v-model="newQuote.description"
                     :rules="rules"
-                    label="Email"
+                    label="description"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
-                    v-model="user.password"
+                    v-model="newQuote.status"
                     :rules="rules"
-                    label="Password"
-                    type="password"
+                    label="status"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="newQuote.totalAmount"
+                    :rules="rules"
+                    label="total"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="newQuote.createdAt"
+                    :rules="rules"
+                    label="created at"
+                  ></v-text-field>
+                </div>
+                <!-- items in quote -->
+                <div class="input-container">
+                  <div v-for="(item, index) in newItems">
+                    <p>Item</p>
+                    <div class="item-container">
+                      <v-text-field
+                        v-model="item.title"
+                        :rules="rules"
+                        label="title"
+                      ></v-text-field>
+                    </div>
+                    <div class="item-container">
+                      <v-text-field
+                        v-model="item.description"
+                        :rules="rules"
+                        label="description"
+                      ></v-text-field>
+                    </div>
+                    <div class="item-container">
+                      <v-text-field
+                        v-model="item.quantity"
+                        :rules="rules"
+                        label="quantity"
+                      ></v-text-field>
+                    </div>
+                    <div class="item-container">
+                      <v-text-field
+                        v-model="item.unitPrice"
+                        :rules="rules"
+                        label="Unit Price"
+                      ></v-text-field>
+                    </div>
+                    <div class="item-container">
+                      <v-text-field
+                        v-model="item.totalPrice"
+                        :rules="rules"
+                        label="Total Price"
+                      ></v-text-field>
+                    </div>
+                    <v-btn @click="deleteItem(index)">Delete Item</v-btn>
+                  </div>
+                  <v-btn @click="createItem()">Add Item</v-btn>
+                </div>
+
+                <div class="input-container">
+                  <v-text-field
+                    v-model="newQuote.comments"
+                    :rules="rules"
+                    label="comment"
                   ></v-text-field>
                 </div>
                 <div class="submit">
