@@ -2,9 +2,9 @@ const URL = "http://localhost:8080";
 Vue.createApp({
   data() {
     return {
-      currentPage: "login",
+      currentPage: "home",
       user: {
-        name: "",
+        companyName: "",
         email: "",
         password: "",
       },
@@ -32,56 +32,7 @@ Vue.createApp({
         },
       ],
       editingQuote: false,
-      quotes: [
-        {
-          title: "Sauls House",
-          description: "Filthy house needs everything done",
-          status: "in-progress",
-          totalAmount: "10g's",
-          createdAt: "9:00",
-          items: [
-            {
-              title: "vaccum",
-              description: "sucks stuff",
-              quantity: "4",
-              unitPrice: "250",
-              totalPrice: "1000",
-            },
-            {
-              title: "bleach",
-              description: "clean",
-              quantity: "3",
-              unitPrice: "10",
-              totalPrice: "30",
-            },
-          ],
-          comments: "QUOTE",
-        },
-        {
-          title: "Sauls House",
-          description: "Filthy house needs everything done",
-          status: "in-progress",
-          totalAmount: "10g's",
-          createdAt: "9:00",
-          items: [
-            {
-              title: "vaccum",
-              description: "sucks stuff",
-              quantity: "4",
-              unitPrice: "250",
-              totalPrice: "1000",
-            },
-            {
-              title: "bleach",
-              description: "clean",
-              quantity: "3",
-              unitPrice: "10",
-              totalPrice: "30",
-            },
-          ],
-          comments: "QUOTE",
-        },
-      ],
+      quotes: [],
 
       // vuetify rules //
       companyNameRules: [
@@ -97,7 +48,9 @@ Vue.createApp({
     setPage: function (page) {
       this.currentPage = page;
     },
+
     registerUser: async function () {
+      console.log("registeration initiated");
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -106,8 +59,7 @@ Vue.createApp({
         headers: myHeaders,
         body: JSON.stringify(this.user),
       };
-
-      let response = await fetch(`${URL}/users`, requestOptions);
+      let response = await fetch(`${URL}/company`, requestOptions);
       if (response.status === 201) {
         console.log("successfully registered");
         this.loginUser();
@@ -117,6 +69,7 @@ Vue.createApp({
     },
 
     loginUser: async function () {
+      console.log("login initiated");
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -131,7 +84,7 @@ Vue.createApp({
         console.log("successfully logged in");
         this.currentUser = data;
         this.user = {
-          name: "",
+          companyName: "",
           email: "",
           password: "",
         };
@@ -147,7 +100,7 @@ Vue.createApp({
       if (response.status === 200) {
         let data = await response.json();
         this.currentUser = data;
-        this.getQuizzes();
+        this.getQuotes();
         this.currentPage = "home";
       } else {
         this.currentPage = "login";
@@ -230,7 +183,7 @@ Vue.createApp({
         this.getQuotes();
       }
     },
-//make changes here
+    //make changes here
     editQuote: function (quiz) {
       this.newQuiz = quiz;
       this.newQuestions = quiz.questions;

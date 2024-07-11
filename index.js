@@ -62,7 +62,7 @@ app.post("/company", async function (req, res) {
       return res.status(422).send(errors);
     }
     await newCompany.save();
-    res.status(201).send("company login created.");
+    res.status(201).send("succesfully registered");
   } catch (error) {
     res.status(500).send("bad request.");
   }
@@ -86,7 +86,7 @@ app.post("/session", async function (req, res) {
     }
     req.session.companyID = company._id;
     req.session.companyName = company.companyName;
-    res.status(201).send("Logged in.");
+    res.status(201).send(req.session);
   } catch (error) {
     console.log(error);
     res.status(500).send("Server error.");

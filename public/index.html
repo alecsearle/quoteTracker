@@ -37,8 +37,14 @@
                 ></v-text-field>
               </div>
               <div class="submit">
-                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large"
-                >Login</v-btn>
+                <v-btn
+                  variant="tonal"
+                  rounded="lg"
+                  v-ripple
+                  size="x-large"
+                  type="submit"
+                  >Login</v-btn
+                >
               </div>
               <div class="gap"></div>
               <div class="buttons">
@@ -62,11 +68,11 @@
 
           <!-- REGISTER -->
           <div v-if="currentPage === 'register'">
-              <v-form fast-fail @submit.prevent="registerUser()">
-                <h3>Register</h3>
+            <v-form fast-fail @submit.prevent="registerUser()">
+              <h3>Register</h3>
               <div class="input-container">
                 <v-text-field
-                  v-model="user.name"
+                  v-model="user.companyName"
                   :rules="companyNameRules"
                   label="Company Name"
                 ></v-text-field>
@@ -87,7 +93,14 @@
                 ></v-text-field>
               </div>
               <div class="submit">
-                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large">Register</v-btn>
+                <v-btn
+                  variant="tonal"
+                  rounded="lg"
+                  v-ripple
+                  size="x-large"
+                  type="submit"
+                  >Register</v-btn
+                >
               </div>
               <div class="gap"></div>
               <div class="buttons">
@@ -106,14 +119,13 @@
                   >
                 </p>
               </div>
-              
-            </form>
+            </v-form>
           </div>
 
           <!-- FIND QUOTE -->
           <div v-if="currentPage === 'findQuote'">
             <v-form fast-fail @submit.prevent="customerQuote()">
-                <h3>Find a Quote</h3>
+              <h3>Find a Quote</h3>
               <div class="input-container">
                 <v-text-field
                   v-model="user.quote"
@@ -122,7 +134,9 @@
                 ></v-text-field>
               </div>
               <div class="submit">
-                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large">Find Quote</v-btn>
+                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large"
+                  >Find Quote</v-btn
+                >
               </div>
               <div class="gap"></div>
               <div class="buttons">
@@ -134,39 +148,74 @@
                   >
                 </p>
               </div>
-            </form>
+            </v-form>
           </div>
 
           <!-- NAV BAR -->
-           <nav v-if="currentPage !== 'login' && currentPage !=='register' && currentPage !=='findQuote'">
-              <h1 @click="setPage('home')">QuoteTracker</h1>
-              <!-- <p v-if="currentUser">Welcome, {{currentUser.name}}</p> -->
-                <div class="nav-selectors">
-                    <v-btn @click="setPage('home')" class="nav-button" variant="tonal" rounded="lg" v-ripple size="x-large">HOME</v-btn>
-                    <v-btn @click="setPage('quotes')" class="nav-button" variant="tonal" rounded="lg" v-ripple size="x-large">QUOTES</v-btn>
-                    <v-btn @click="setPage('stats')" class="nav-button" variant="tonal" rounded="lg" v-ripple size="x-large">COMPANY STATS</v-btn>
-                  
-                </div>
-               <v-btn variant="tonal" rounded="lg" v-ripple size="x-large" class="nav-button">PROFILE</v-btn>
-              <!-- <button
+          <nav
+            v-if="currentPage !== 'login' && currentPage !=='register' && currentPage !=='findQuote'"
+          >
+            <h1 @click="setPage('home')">QuoteTracker</h1>
+            <p v-if="currentUser">welcome, {{currentUser.companyName}}</p>
+            <div class="nav-selectors">
+              <v-btn
+                @click="setPage('home')"
+                class="nav-button"
+                variant="tonal"
+                rounded="lg"
+                v-ripple
+                size="x-large"
+                >HOME</v-btn
+              >
+              <v-btn
+                @click="setPage('quotes')"
+                class="nav-button"
+                variant="tonal"
+                rounded="lg"
+                v-ripple
+                size="x-large"
+                >QUOTES</v-btn
+              >
+              <v-btn
+                @click="setPage('stats')"
+                class="nav-button"
+                variant="tonal"
+                rounded="lg"
+                v-ripple
+                size="x-large"
+                >COMPANY STATS</v-btn
+              >
+            </div>
+            <v-btn
+              variant="tonal"
+              rounded="lg"
+              v-ripple
+              size="x-large"
+              class="nav-button"
+              @click="deleteSession()"
+              >LOGOUT</v-btn
+            >
+            <!-- <button
                 v-if="currentUser"
                 @click="deleteSession()"
                 >
                 Logout
               </button> -->
-            </nav>
+          </nav>
 
           <!-- CUSTOMER QUOTE -->
-           <div v-if="currentPage === 'customerQuote'"></div>
-            
+          <div v-if="currentPage === 'customerQuote'"></div>
+
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
-            
-            <h1>New Quote +</h1>
+            <div @click="setPage('newQuote')">
+              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
+                >New Quote +</v-btn
+              >
+            </div>
             <h3>Recent Quotes</h3>
 
-            <div
-              v-for="quote in quotes">
+            <div v-for="quote in quotes">
               <h3>{{quote.title}}</h3>
               <p>{{quote.description}}</p>
               <p>{{quote.status}}</p>
@@ -174,15 +223,15 @@
               <p>{{quote.createdAt}}</p>
               <div v-show="">
                 <div v-for="item in quote.items">
-                <h4>{{item.title}}</h4>
-                <p>{{item.description}}</p>
-                <p>{{item.quantity}}</p>
-                <p>{{item.unitPrice}}</p>
-                <p>{{item.totalPrice}}</p>
+                  <h4>{{item.title}}</h4>
+                  <p>{{item.description}}</p>
+                  <p>{{item.quantity}}</p>
+                  <p>{{item.unitPrice}}</p>
+                  <p>{{item.totalPrice}}</p>
+                </div>
+                <p>{{quote.comments}}</p>
               </div>
-              <p>{{quote.comments}}</p>
-              </div>
-              
+
               <!-- <div class="edit_delete">
                 <button
                   v-if="quote.owner === currentUser.userID"
@@ -206,15 +255,59 @@
               <input
                 type="text"
                 placeholder="Search..."
-                v-model="searchInput" />
+                v-model="searchInput"
+              />
               <p id="clear-search">X</p>
             </div>
           </div>
 
+          <!-- NEW QUOTE -->
+          <div v-if="currentPage === 'newQuote'">
+            <div class="form">
+              <v-form fast-fail @submit.prevent="registerUser()">
+                <h3>New Quote</h3>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.companyName"
+                    :rules="companyNameRules"
+                    label="Company Name"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.email"
+                    :rules="rules"
+                    label="Email"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.password"
+                    :rules="rules"
+                    label="Password"
+                    type="password"
+                  ></v-text-field>
+                </div>
+                <div class="submit">
+                  <v-btn
+                    variant="tonal"
+                    rounded="lg"
+                    v-ripple
+                    size="x-large"
+                    type="submit"
+                    >Submit Quote</v-btn
+                  >
+                </div>
+                <div class="gap"></div>
+                <div class="buttons"></div>
+              </v-form>
+            </div>
+          </div>
+
           <!-- COMPANY STATS -->
-           <div v-if="currentPage === 'stats'">
+          <div v-if="currentPage === 'stats'">
             <h1>COMPANY STATS</h1>
-           </div>
+          </div>
         </v-main>
       </v-app>
     </div>

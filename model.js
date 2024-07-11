@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { Schema } = mongoose;
 
-mongoose.connect(process.env.DBPASSWORDS);
+mongoose.connect(process.env.DBPASSWORD);
 
 const QuoteSchema = Schema(
   {
