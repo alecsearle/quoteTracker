@@ -2,7 +2,7 @@ const URL = "http://localhost:8080";
 Vue.createApp({
   data() {
     return {
-      currentPage: "home",
+      currentPage: "login",
       user: {
         name: "",
         email: "",
