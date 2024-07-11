@@ -268,6 +268,34 @@
                 <h3>New Quote</h3>
                 <div class="input-container">
                   <v-text-field
+                    v-model="newQuote.customerInfo.name"
+                    :rules="rules"
+                    label="Customer Name"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="newQuote.customerInfo.email"
+                    :rules="rules"
+                    label="Customer Email"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="newQuote.customerInfo.phone"
+                    :rules="rules"
+                    label="Customer Phone Number"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="newQuote.customerInfo.address"
+                    :rules="rules"
+                    label="Customer Address"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
                     v-model="newQuote.title"
                     :rules="rules"
                     label="Quote Title"
@@ -280,27 +308,13 @@
                     label="description"
                   ></v-text-field>
                 </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.status"
-                    :rules="rules"
-                    label="status"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.totalAmount"
-                    :rules="rules"
-                    label="total"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
+                <!-- <div class="input-container">
                   <v-text-field
                     v-model="newQuote.createdAt"
                     :rules="rules"
                     label="created at"
                   ></v-text-field>
-                </div>
+                </div> -->
                 <!-- items in quote -->
                 <div class="input-container">
                   <div v-for="(item, index) in newItems">
@@ -333,23 +347,22 @@
                         label="Unit Price"
                       ></v-text-field>
                     </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.totalPrice"
-                        :rules="rules"
-                        label="Total Price"
-                      ></v-text-field>
-                    </div>
-                    <v-btn @click="deleteItem(index)">Delete Item</v-btn>
+                    <v-btn @click="deleteItem(index)">X</v-btn>
                   </div>
                   <v-btn @click="createItem()">Add Item</v-btn>
                 </div>
-
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.comments"
                     :rules="rules"
                     label="comment"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="newQuote.totalAmount"
+                    :rules="rules"
+                    label="total"
                   ></v-text-field>
                 </div>
                 <div class="submit">

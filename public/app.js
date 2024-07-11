@@ -12,17 +12,17 @@ Vue.createApp({
       newQuote: {
         customerInfo: {
           name: "",
-          phoneNumber: "",
           email: "",
+          phone: "",
           address: "",
         },
         title: "",
         description: "",
-        status: "",
-        totalAmount: "",
+        status: "created",
         createdAt: "",
         items: [],
-        comments: "",
+        totalAmount: "",
+        comment: "",
       },
       newComment: {
         item: "",
@@ -174,7 +174,7 @@ Vue.createApp({
         totalAmount: "",
         createdAt: "",
         items: [],
-        comments: "",
+        comment: "",
       };
       this.newItem = [
         {

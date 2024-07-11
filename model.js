@@ -41,6 +41,11 @@ const QuoteSchema = Schema(
       type: String,
       required: [true, "Quote must have a title."],
     },
+
+    description: {
+      type: String,
+    },
+
     owner: {
       type: Schema.Types.ObjectId,
       ref: "Company",
@@ -73,6 +78,9 @@ const QuoteSchema = Schema(
     total_amount: {
       type: Number,
       required: [true, "Quote must have a total amount."],
+    },
+    comment: {
+      type: String,
     },
   },
   { timestamps: true }

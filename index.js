@@ -117,11 +117,13 @@ app.get("/quotes", async function (req, res) {
 app.post("/quotes", async function (req, res) {
   try {
     let newQuote = new model.Quote({
-      customer: req.body.customer,
+      customer: req.body.customerInfo,
       title: req.body.title,
+      description: req.body.description,
       owner: req.session.companyID,
       items: req.body.items,
-      total_amount: req.body.total_amount,
+      total_amount: req.body.totalAmount,
+      comment: req.body.comment,
     });
     const errors = newQuote.validateSync();
     if (errors) {
