@@ -65,17 +65,17 @@ const QuoteSchema = Schema(
           type: Number,
           required: [true, "Quote item must have a quantity."],
         },
-        unit_price: {
+        unitPrice: {
           type: Number,
           required: [true, "Quote item must have a price."],
         },
-        total_price: {
+        totalPrice: {
           type: Number,
           required: [true, "Quote item must have a total price."],
         },
       },
     ],
-    total_amount: {
+    totalAmount: {
       type: Number,
       required: [true, "Quote must have a total amount."],
     },

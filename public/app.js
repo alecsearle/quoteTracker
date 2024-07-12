@@ -2,13 +2,14 @@ const URL = "http://localhost:8080";
 Vue.createApp({
   data() {
     return {
-      currentPage: "home",
+      currentPage: "login",
       user: {
         companyName: "",
         email: "",
         password: "",
       },
       currentUser: null,
+      currentQuote: {},
       newQuote: {
         customerInfo: {
           name: "",
@@ -30,7 +31,7 @@ Vue.createApp({
       },
       newItems: [
         {
-          title: "",
+          name: "",
           description: "",
           quantity: "",
           unitPrice: "",
@@ -158,12 +159,22 @@ Vue.createApp({
         console.log("failed to create a quote");
       }
     },
-    //
+
+    //ALL CUSTOMER QUOTES
     getQuotes: async function () {
+      console.log("fetching quotes");
       let response = await fetch(`${URL}/quotes`);
       let data = await response.json();
-      this.quotes = data;
+      this.quotes = data.reverse();
       console.log(data);
+    },
+
+    // SINGLE CUSTOMER QUOTE
+    getQuote: async function (quoteID) {
+      let res = await fetch(`${URL}/quotes/${quoteID}`);
+      let data = await res.json();
+      this.currentQuote = data[0];
+      this.currentPage = "customerQuote";
     },
     //should be good
     clearQuote: function () {
@@ -198,7 +209,7 @@ Vue.createApp({
         method: "DELETE",
       };
 
-      let response = await fetch(`${URL}/quizzes/${quoteId}`, requestOptions);
+      let response = await fetch(`${URL}/quotes/${quoteId}`, requestOptions);
       if (response.status === 204) {
         this.getQuotes();
       }

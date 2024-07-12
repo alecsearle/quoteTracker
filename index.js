@@ -122,7 +122,7 @@ app.post("/quotes", async function (req, res) {
       description: req.body.description,
       owner: req.session.companyID,
       items: req.body.items,
-      total_amount: req.body.totalAmount,
+      totalAmount: req.body.totalAmount,
       comment: req.body.comment,
     });
     const errors = newQuote.validateSync();
@@ -184,7 +184,7 @@ app.put("/quotes/:quoteID", AuthMiddleware, async function (req, res) {
     quote.customer = req.body.customer;
     quote.title = req.body.title;
     quote.items = req.body.items;
-    quote.total_amount = req.body.total_amount;
+    quote.totalAmount = req.body.totalAmount;
 
     const errors = await quote.validateSync();
     if (errors) {

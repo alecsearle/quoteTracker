@@ -124,17 +124,22 @@
 
           <!-- FIND QUOTE -->
           <div v-if="currentPage === 'findQuote'">
-            <v-form fast-fail @submit.prevent="customerQuote()">
+            <v-form fast-fail @submit.prevent="getQuote(quotes._id)">
               <h3>Find a Quote</h3>
               <div class="input-container">
                 <v-text-field
-                  v-model="user.quote"
+                  v-model="quotes._id"
                   :rules="rules"
                   label="Quote Number"
                 ></v-text-field>
               </div>
               <div class="submit">
-                <v-btn variant="tonal" rounded="lg" v-ripple size="x-large"
+                <v-btn
+                  variant="tonal"
+                  rounded="lg"
+                  v-ripple
+                  size="x-large"
+                  type="submit"
                   >Find Quote</v-btn
                 >
               </div>
@@ -151,9 +156,31 @@
             </v-form>
           </div>
 
+          <!-- CUSTOMER QUOTE -->
+          <div v-if="currentPage === 'customerQuote'">
+            <h1>{{quotes._id}}</h1>
+            <h3>{{currentQuote.title}}</h3>
+            <p>{{currentQuote.customer[0].name}}</p>
+            <p>{{currentQuote.customer[0].email}}</p>
+            <p>{{currentQuote.customer[0].phone}}</p>
+            <p>{{currentQuote.customer[0].address}}</p>
+            <p>{{currentQuote.description}}</p>
+            <p>{{currentQuote.status}}</p>
+            <p>{{currentQuote.createdAt}}</p>
+            <div v-for="item in currentQuote.items">
+              <h4>{{item.name}}</h4>
+              <p>{{item.description}}</p>
+              <p>{{item.quantity}}</p>
+              <p>{{item.unitPrice}}</p>
+              <p>{{item.totalPrice}}</p>
+            </div>
+            <h1>${{currentQuote.totalAmount}}</h1>
+            <p>{{currentQuote.comments}}</p>
+          </div>
+
           <!-- NAV BAR -->
           <nav
-            v-if="currentPage !== 'login' && currentPage !=='register' && currentPage !=='findQuote'"
+            v-if="currentPage !== 'login' && currentPage !=='register' && currentPage !=='findQuote' && currentPage !== 'customerQuote'"
           >
             <h1 @click="setPage('home')">QuoteTracker</h1>
             <p v-if="currentUser">welcome, {{currentUser.companyName}}</p>
@@ -203,36 +230,25 @@
               </button> -->
           </nav>
 
-          <!-- CUSTOMER QUOTE -->
-          <div v-if="currentPage === 'customerQuote'"></div>
-
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
-            <div @click="setPage('newQuote')">
+            <div @click="setPage('newQuote')" class="new-quote">
               <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
                 >New Quote +</v-btn
               >
             </div>
             <h3>Recent Quotes</h3>
-
-            <div v-for="quote in quotes">
-              <h3>{{quote.title}}</h3>
-              <p>{{quote.description}}</p>
-              <p>{{quote.status}}</p>
-              <p>{{quote.totalAmount}}</p>
-              <p>{{quote.createdAt}}</p>
-              <div v-show="">
-                <div v-for="item in quote.items">
-                  <h4>{{item.title}}</h4>
-                  <p>{{item.description}}</p>
-                  <p>{{item.quantity}}</p>
-                  <p>{{item.unitPrice}}</p>
-                  <p>{{item.totalPrice}}</p>
-                </div>
+            <div class="thumbnails">
+              <div v-for="quote in quotes" class="quote-thumbnail">
+                <h3>{{quote.title}}</h3>
+                <p>{{quote.description}}</p>
+                <p>{{quote.customer.name}}</p>
+                <p>{{quote.status}}</p>
+                <p>{{quote.createdAt}}</p>
+                <h4>${{quote.totalAmount}}</h4>
                 <p>{{quote.comments}}</p>
-              </div>
 
-              <!-- <div class="edit_delete">
+                <!-- <div class="edit_delete">
                 <button
                   v-if="quote.owner === currentUser.userID"
                   @click.stop="editQuote(quote)">
@@ -245,6 +261,7 @@
                   Delete
                 </button>
               </div> -->
+              </div>
             </div>
           </div>
 
@@ -321,7 +338,7 @@
                     <p>Item</p>
                     <div class="item-container">
                       <v-text-field
-                        v-model="item.title"
+                        v-model="item.name"
                         :rules="rules"
                         label="title"
                       ></v-text-field>

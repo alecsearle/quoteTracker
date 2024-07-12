@@ -59,3 +59,23 @@ nav {
 .nav-button:hover {
   background-color: var(--hover);
 }
+
+/* HOME PAGE */
+.new-quote {
+  padding: 1rem 1rem 1rem 0rem;
+}
+.thumbnails {
+  display: flex;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.quote-thumbnail {
+  width: 400px;
+  height: 200px;
+  padding: 1rem;
+  margin: 0.5rem;
+  padding-bottom: 2rem;
+  border: 1px solid black;
+}
