@@ -215,11 +215,11 @@ Vue.createApp({
       }
     },
     //make changes here
-    editQuote: function (quiz) {
-      this.newQuiz = quiz;
-      this.newQuestions = quiz.questions;
-      this.currentPage = "createQuiz";
-      this.editingQuiz = true;
+    editQuote: function (quote) {
+      this.newQuote = quote;
+      this.newItem = quote.items;
+      this.currentPage = "home";
+      this.editingQuote = true;
     },
 
     saveQuote: async function () {
