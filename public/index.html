@@ -243,8 +243,11 @@
             </div>
             <h3>Recent Quotes</h3>
             <div class="thumbnails">
-              <div  v-for="quote in quotes" >
-                <div v-if="quote.owner === currentUser.companyID" class="quote-thumbnail">
+              <div v-for="quote in quotes.slice(0,3)">
+                <div
+                  v-if="quote.owner === currentUser.companyID"
+                  class="quote-thumbnail"
+                >
                   <h5>{{quote._id}}</h5>
                   <h3>{{quote.title}}</h3>
                   <p>{{quote.description}}</p>
@@ -255,17 +258,15 @@
                   <p>{{quote.comments}}</p>
 
                   <div class="edit_delete">
-                  <button
-                    @click.stop="editQuote(quote)">
-                    Edit
-                  </button>
-                  <button
-                    @click.stop="deleteQuote(quote._id)"
-                    id="delete_button">
-                    Delete
-                  </button>
+                    <button @click.stop="editQuote(quote)">Edit</button>
+                    <button
+                      @click.stop="deleteQuote(quote._id)"
+                      id="delete_button"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           </div>
@@ -280,6 +281,33 @@
                 v-model="searchInput"
               />
               <p id="clear-search">X</p>
+            </div>
+            <div class="thumbnails">
+              <div v-for="quote in quotes">
+                <div
+                  v-if="quote.owner === currentUser.companyID"
+                  class="quote-thumbnail"
+                >
+                  <h5>{{quote._id}}</h5>
+                  <h3>{{quote.title}}</h3>
+                  <p>{{quote.description}}</p>
+                  <p>{{quote.customer.name}}</p>
+                  <p>{{quote.status}}</p>
+                  <p>{{quote.createdAt}}</p>
+                  <h4>${{quote.totalAmount}}</h4>
+                  <p>{{quote.comments}}</p>
+
+                  <div class="edit_delete">
+                    <button @click.stop="editQuote(quote)">Edit</button>
+                    <button
+                      @click.stop="deleteQuote(quote._id)"
+                      id="delete_button"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
