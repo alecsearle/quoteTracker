@@ -157,13 +157,17 @@
           </div>
 
           <!-- CUSTOMER QUOTE -->
-          <div v-if="currentPage === 'customerQuote'">
+          <div v-if="currentPage === 'customerQuote'" class="customer-quote">
             <h1>{{quotes._id}}</h1>
             <h3>{{currentQuote.title}}</h3>
-            <p>{{currentQuote.customer[0].name}}</p>
-            <p>{{currentQuote.customer[0].email}}</p>
-            <p>{{currentQuote.customer[0].phone}}</p>
-            <p>{{currentQuote.customer[0].address}}</p>
+            <div class="customer-information">
+              <h4>Customer Information:</h4>
+              <p>{{currentQuote.customer[0].name}}</p>
+              <p>{{currentQuote.customer[0].email}}</p>
+              <p>{{currentQuote.customer[0].phone}}</p>
+              <p>{{currentQuote.customer[0].address}}</p>
+            </div>
+
             <p>{{currentQuote.description}}</p>
             <p>{{currentQuote.status}}</p>
             <p>{{currentQuote.createdAt}}</p>
@@ -241,6 +245,7 @@
             <div class="thumbnails">
               <div  v-for="quote in quotes" >
                 <div v-if="quote.owner === currentUser.companyID" class="quote-thumbnail">
+                  <h5>{{quote._id}}</h5>
                   <h3>{{quote.title}}</h3>
                   <p>{{quote.description}}</p>
                   <p>{{quote.customer.name}}</p>
