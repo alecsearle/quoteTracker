@@ -40,6 +40,7 @@ Vue.createApp({
       ],
       editingQuote: false,
       quotes: [],
+      deletedQuotes: [],
 
       // vuetify rules //
       companyNameRules: [
