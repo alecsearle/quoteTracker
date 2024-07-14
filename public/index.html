@@ -236,8 +236,8 @@
 
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
-            <div @click="setPage('newQuote')" class="new-quote">
-              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
+            <div @click="setPage('newQuote')" class="new-quote" v-if="!editQuiz">
+              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple 
                 >New Quote +</v-btn
               >
             </div>
@@ -290,28 +290,28 @@
                 <h3>New Quote</h3>
                 <div class="input-container">
                   <v-text-field
-                    v-model="newQuote.customerInfo.name"
+                    v-model="newQuote.customer.name"
                     :rules="rules"
                     label="Customer Name"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
-                    v-model="newQuote.customerInfo.email"
+                    v-model="newQuote.customer.email"
                     :rules="rules"
                     label="Customer Email"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
-                    v-model="newQuote.customerInfo.phone"
+                    v-model="newQuote.customer.phone"
                     :rules="rules"
                     label="Customer Phone Number"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
-                    v-model="newQuote.customerInfo.address"
+                    v-model="newQuote.customer.address"
                     :rules="rules"
                     label="Customer Address"
                   ></v-text-field>

@@ -11,7 +11,7 @@ Vue.createApp({
       currentUser: null,
       currentQuote: {},
       newQuote: {
-        customerInfo: {
+        customer: {
           name: "",
           email: "",
           phone: "",
@@ -179,15 +179,21 @@ Vue.createApp({
     //should be good
     clearQuote: function () {
       this.newQuote = {
+        customer: {
+          name: "",
+          email: "",
+          phone: "",
+          address: "",
+        },
         title: "",
         description: "",
-        status: "",
-        totalAmount: "",
+        status: "created",
         createdAt: "",
         items: [],
+        totalAmount: "",
         comment: "",
-      };
-      this.newItem = [
+      },
+      this.newItems = [
         {
           title: "",
           description: "",
@@ -217,8 +223,9 @@ Vue.createApp({
     //make changes here
     editQuote: function (quote) {
       this.newQuote = quote;
-      this.newItem = quote.items;
-      this.currentPage = "home";
+      this.newItems = quote.items;
+      console.log(this.newQuote, this.newItems)
+      this.currentPage = "newQuote";
       this.editingQuote = true;
     },
 
