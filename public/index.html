@@ -22,11 +22,16 @@
             <v-form fast-fail @submit.prevent="loginUser()">
               <h3>Login</h3>
               <div class="input-container">
-                <v-text-field v-model="user.email" label="Email"></v-text-field>
+                <v-text-field
+                  v-model="user.email"
+                  :rules="rules"
+                  label="Email"
+                ></v-text-field>
               </div>
               <div class="input-container">
                 <v-text-field
                   v-model="user.password"
+                  :rules="rules"
                   label="Password"
                   type="password"
                 ></v-text-field>
@@ -73,11 +78,16 @@
                 ></v-text-field>
               </div>
               <div class="input-container">
-                <v-text-field v-model="user.email" label="Email"></v-text-field>
+                <v-text-field
+                  v-model="user.email"
+                  :rules="rules"
+                  label="Email"
+                ></v-text-field>
               </div>
               <div class="input-container">
                 <v-text-field
                   v-model="user.password"
+                  :rules="rules"
                   label="Password"
                   type="password"
                 ></v-text-field>
@@ -119,6 +129,7 @@
               <div class="input-container">
                 <v-text-field
                   v-model="quotes._id"
+                  :rules="rules"
                   label="Quote Number"
                 ></v-text-field>
               </div>
@@ -225,22 +236,15 @@
 
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
-            <div
-              @click="setPage('newQuote')"
-              class="new-quote"
-              v-if="!editQuiz"
-            >
-              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
+            <div @click="setPage('newQuote')" class="new-quote" v-if="!editQuiz">
+              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple 
                 >New Quote +</v-btn
               >
             </div>
             <h3>Recent Quotes</h3>
             <div class="thumbnails">
-              <div v-for="quote in quotes.slice(0,3)">
-                <div
-                  v-if="quote.owner === currentUser.companyID"
-                  class="quote-thumbnail"
-                >
+              <div  v-for="quote in quotes" >
+                <div v-if="quote.owner === currentUser.companyID" class="quote-thumbnail">
                   <h5>{{quote._id}}</h5>
                   <h3>{{quote.title}}</h3>
                   <p>{{quote.description}}</p>
@@ -251,15 +255,17 @@
                   <p>{{quote.comments}}</p>
 
                   <div class="edit_delete">
-                    <button @click.stop="editQuote(quote)">Edit</button>
-                    <button
-                      @click.stop="deleteQuote(quote._id)"
-                      id="delete_button"
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  <button
+                    @click.stop="editQuote(quote)">
+                    Edit
+                  </button>
+                  <button
+                    @click.stop="deleteQuote(quote._id)"
+                    id="delete_button">
+                    Delete
+                  </button>
                 </div>
+              </div>
               </div>
             </div>
           </div>
@@ -275,81 +281,52 @@
               />
               <p id="clear-search">X</p>
             </div>
-            <div class="thumbnails">
-              <div @click="setPage('newQuote')" class="new-quote">
-                <div @click="setPage('newQuote')">
-                  <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
-                    >New Quote +</v-btn
-                  >
-                </div>
-              </div>
-              <div v-for="quote in quotes">
-                <div
-                  v-if="quote.owner === currentUser.companyID"
-                  class="quote-thumbnail"
-                >
-                  <h5>{{quote._id}}</h5>
-                  <h3>{{quote.title}}</h3>
-                  <p>{{quote.description}}</p>
-                  <p>{{quote.customer.name}}</p>
-                  <p>{{quote.status}}</p>
-                  <p>{{quote.createdAt}}</p>
-                  <h4>${{quote.totalAmount}}</h4>
-                  <p>{{quote.comments}}</p>
-
-                  <div class="edit_delete">
-                    <button @click.stop="editQuote(quote)">Edit</button>
-                    <button
-                      @click.stop="deleteQuote(quote._id)"
-                      id="delete_button"
-                    >
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- NEW QUOTE -->
           <div v-if="currentPage === 'newQuote'">
             <div class="form">
               <v-form fast-fail @submit.prevent="createQuote()">
-                <h3 v-if="!editingQuote">New Quote</h3>
-                <h3 v-else>Edit Quote</h3>
+                <h3>New Quote</h3>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.name"
+                    :rules="rules"
                     label="Customer Name"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.email"
+                    :rules="rules"
                     label="Customer Email"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.phone"
+                    :rules="rules"
                     label="Customer Phone Number"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.address"
+                    :rules="rules"
                     label="Customer Address"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.title"
+                    :rules="rules"
                     label="Quote Title"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.description"
+                    :rules="rules"
                     label="description"
                   ></v-text-field>
                 </div>
@@ -367,24 +344,28 @@
                     <div class="item-container">
                       <v-text-field
                         v-model="item.name"
+                        :rules="rules"
                         label="title"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.description"
+                        :rules="rules"
                         label="description"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.quantity"
+                        :rules="rules"
                         label="quantity"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.unitPrice"
+                        :rules="rules"
                         label="Unit Price"
                       ></v-text-field>
                     </div>
@@ -395,12 +376,14 @@
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.comments"
+                    :rules="rules"
                     label="comment"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.totalAmount"
+                    :rules="rules"
                     label="total"
                   ></v-text-field>
                 </div>
@@ -411,18 +394,7 @@
                     v-ripple
                     size="x-large"
                     type="submit"
-                    v-if="!editingQuote"
                     >Submit Quote</v-btn
-                  >
-                  <v-btn
-                    variant="tonal"
-                    rounded="lg"
-                    v-ripple
-                    size="x-large"
-                    type="submit"
-                    v-else
-                    @click="saveQuote()"
-                    >Save Quote</v-btn
                   >
                 </div>
                 <div class="gap"></div>

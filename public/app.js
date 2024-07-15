@@ -55,10 +55,6 @@ Vue.createApp({
   methods: {
     setPage: function (page) {
       this.currentPage = page;
-      if (this.currentPage === "newQuote") {
-        this.clearQuote();
-        this.editingQuote = false;
-      }
     },
 
     createItem: function () {
@@ -143,8 +139,6 @@ Vue.createApp({
       }
     },
     createQuote: async function () {
-      this.editingQuote = false;
-      this.clearQuote();
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
@@ -185,7 +179,7 @@ Vue.createApp({
     },
     //should be good
     clearQuote: function () {
-      (this.newQuote = {
+      this.newQuote = {
         customer: {
           name: "",
           email: "",
@@ -199,16 +193,16 @@ Vue.createApp({
         items: [],
         totalAmount: "",
         comment: "",
-      }),
-        (this.newItems = [
-          {
-            title: "",
-            description: "",
-            quantity: "",
-            unitPrice: "",
-            totalPrice: "",
-          },
-        ]);
+      },
+      this.newItems = [
+        {
+          title: "",
+          description: "",
+          quantity: "",
+          unitPrice: "",
+          totalPrice: "",
+        },
+      ];
       this.newComment = {
         item: "",
         comment: "",
@@ -231,7 +225,7 @@ Vue.createApp({
     editQuote: function (quote) {
       this.newQuote = quote;
       this.newItems = quote.items;
-      console.log(this.newQuote, this.newItems);
+      console.log(this.newQuote, this.newItems)
       this.currentPage = "newQuote";
       this.editingQuote = true;
     },
