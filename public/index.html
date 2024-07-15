@@ -236,8 +236,12 @@
 
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
-            <div @click="setPage('newQuote')" class="new-quote" v-if="!editQuiz">
-              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple 
+            <div
+              @click="setPage('newQuote')"
+              class="new-quote"
+              v-if="!editQuiz"
+            >
+              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
                 >New Quote +</v-btn
               >
             </div>
@@ -283,6 +287,13 @@
               <p id="clear-search">X</p>
             </div>
             <div class="thumbnails">
+              <div @click="setPage('newQuote')" class="new-quote">
+                <div @click="setPage('newQuote')">
+                  <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
+                    >New Quote +</v-btn
+                  >
+                </div>
+              </div>
               <div v-for="quote in quotes">
                 <div
                   v-if="quote.owner === currentUser.companyID"
@@ -315,7 +326,8 @@
           <div v-if="currentPage === 'newQuote'">
             <div class="form">
               <v-form fast-fail @submit.prevent="createQuote()">
-                <h3>New Quote</h3>
+                <h3 v-if="!editingQuote">New Quote</h3>
+                <h3 v-else>Edit Quote</h3>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.name"
@@ -422,7 +434,18 @@
                     v-ripple
                     size="x-large"
                     type="submit"
+                    v-if="!editingQuote"
                     >Submit Quote</v-btn
+                  >
+                  <v-btn
+                    variant="tonal"
+                    rounded="lg"
+                    v-ripple
+                    size="x-large"
+                    type="submit"
+                    v-else
+                    @click="saveQuote()"
+                    >Save Quote</v-btn
                   >
                 </div>
                 <div class="gap"></div>
