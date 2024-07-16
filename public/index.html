@@ -22,16 +22,11 @@
             <v-form fast-fail @submit.prevent="loginUser()">
               <h3>Login</h3>
               <div class="input-container">
-                <v-text-field
-                  v-model="user.email"
-                  :rules="rules"
-                  label="Email"
-                ></v-text-field>
+                <v-text-field v-model="user.email" label="Email"></v-text-field>
               </div>
               <div class="input-container">
                 <v-text-field
                   v-model="user.password"
-                  :rules="rules"
                   label="Password"
                   type="password"
                 ></v-text-field>
@@ -78,16 +73,11 @@
                 ></v-text-field>
               </div>
               <div class="input-container">
-                <v-text-field
-                  v-model="user.email"
-                  :rules="rules"
-                  label="Email"
-                ></v-text-field>
+                <v-text-field v-model="user.email" label="Email"></v-text-field>
               </div>
               <div class="input-container">
                 <v-text-field
                   v-model="user.password"
-                  :rules="rules"
                   label="Password"
                   type="password"
                 ></v-text-field>
@@ -129,7 +119,6 @@
               <div class="input-container">
                 <v-text-field
                   v-model="quotes._id"
-                  :rules="rules"
                   label="Quote Number"
                 ></v-text-field>
               </div>
@@ -319,42 +308,36 @@
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.name"
-                    :rules="rules"
                     label="Customer Name"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.email"
-                    :rules="rules"
                     label="Customer Email"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.phone"
-                    :rules="rules"
                     label="Customer Phone Number"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.address"
-                    :rules="rules"
                     label="Customer Address"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.title"
-                    :rules="rules"
                     label="Quote Title"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.description"
-                    :rules="rules"
                     label="description"
                   ></v-text-field>
                 </div>
@@ -372,28 +355,24 @@
                     <div class="item-container">
                       <v-text-field
                         v-model="item.name"
-                        :rules="rules"
                         label="title"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.description"
-                        :rules="rules"
                         label="description"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.quantity"
-                        :rules="rules"
                         label="quantity"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.unitPrice"
-                        :rules="rules"
                         label="Unit Price"
                       ></v-text-field>
                     </div>
@@ -404,14 +383,12 @@
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.comments"
-                    :rules="rules"
                     label="comment"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.totalAmount"
-                    :rules="rules"
                     label="total"
                   ></v-text-field>
                 </div>
