@@ -19,7 +19,7 @@ Vue.createApp({
         },
         title: "",
         description: "",
-        status: "created",
+        status: "",
         createdAt: "",
         items: [],
         totalAmount: "",
@@ -142,7 +142,7 @@ Vue.createApp({
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
-      this.newQuote.items = this.newItem;
+      this.newQuote.items = this.newItems;
 
       let requestOptions = {
         method: "POST",
@@ -189,11 +189,11 @@ Vue.createApp({
         title: "",
         description: "",
         status: "created",
+        totalAmount: "",
         createdAt: "",
         items: [],
-        totalAmount: "",
         comment: "",
-      },
+      };
       this.newItems = [
         {
           title: "",
@@ -225,8 +225,7 @@ Vue.createApp({
     editQuote: function (quote) {
       this.newQuote = quote;
       this.newItems = quote.items;
-      console.log(this.newQuote, this.newItems)
-      this.currentPage = "newQuote";
+      this.currentPage = "home";
       this.editingQuote = true;
     },
 
@@ -234,7 +233,7 @@ Vue.createApp({
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
-      this.newQuote.items = this.newItem;
+      this.newQuote.items = this.newItems;
 
       let requestOptions = {
         method: "PUT",
