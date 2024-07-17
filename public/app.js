@@ -59,7 +59,7 @@ Vue.createApp({
 
     createItem: function () {
       this.newItems.push({
-        title: "",
+        name: "",
         description: "",
         quantity: "",
         unitPrice: "",
@@ -142,7 +142,7 @@ Vue.createApp({
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
-      this.newQuote.items = this.newItemss;
+      this.newQuote.items = this.newItem;
 
       let requestOptions = {
         method: "POST",
@@ -197,7 +197,7 @@ Vue.createApp({
       };
       this.newItems = [
         {
-          title: "",
+          name: "",
           description: "",
           quantity: "",
           unitPrice: "",
@@ -227,7 +227,7 @@ Vue.createApp({
       console.log(this.currentQuote);
       this.newQuote = quote;
       this.newItems = quote.items;
-      this.currentPage = "home";
+      this.currentPage = "editPage";
       this.editingQuote = true;
     },
 
@@ -255,6 +255,10 @@ Vue.createApp({
         console.log("failed to update quote");
       }
     },
+    editOff: function () {
+      this.editingQuote = false;
+      this.clearQuote();
+    }
   },
   computed: {
     balance: function () {
