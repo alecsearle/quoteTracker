@@ -143,7 +143,7 @@ Vue.createApp({
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
-      this.newQuote.items = this.newItem;
+      this.newQuote.items = this.newItems;
 
       let requestOptions = {
         method: "POST",
@@ -235,12 +235,13 @@ Vue.createApp({
     saveQuote: async function () {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
+      console.log(myHeaders)
 
       this.newQuote.items = this.newItems;
-
+      console.log(this.newQuote)
       let requestOptions = {
         method: "PUT",
-        header: myHeaders,
+        headers: myHeaders,
         body: JSON.stringify(this.newQuote),
       };
 
