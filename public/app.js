@@ -142,7 +142,7 @@ Vue.createApp({
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
 
-      this.newQuote.items = this.newItems;
+      this.newQuote.items = this.newItemss;
 
       let requestOptions = {
         method: "POST",
@@ -174,6 +174,7 @@ Vue.createApp({
     getQuote: async function (quoteID) {
       let res = await fetch(`${URL}/quotes/${quoteID}`);
       let data = await res.json();
+      console.log(data);
       this.currentQuote = data[0];
       this.currentPage = "customerQuote";
     },
@@ -223,6 +224,7 @@ Vue.createApp({
     },
     //make changes here
     editQuote: function (quote) {
+      console.log(this.currentQuote);
       this.newQuote = quote;
       this.newItems = quote.items;
       this.currentPage = "home";

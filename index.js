@@ -117,7 +117,7 @@ app.get("/quotes", async function (req, res) {
 app.post("/quotes", async function (req, res) {
   try {
     let newQuote = new model.Quote({
-      customer: req.body.customerInfo,
+      customer: req.body.customer,
       title: req.body.title,
       description: req.body.description,
       owner: req.session.companyID,
@@ -127,6 +127,7 @@ app.post("/quotes", async function (req, res) {
     });
     const errors = newQuote.validateSync();
     if (errors) {
+      console.log(errors);
       return res.status(422).send(errors);
     }
     await newQuote.populate("owner", "companyName");

@@ -22,11 +22,16 @@
             <v-form fast-fail @submit.prevent="loginUser()">
               <h3>Login</h3>
               <div class="input-container">
-                <v-text-field v-model="user.email" label="Email"></v-text-field>
+                <v-text-field
+                  v-model="user.email"
+                  :rules="rules"
+                  label="Email"
+                ></v-text-field>
               </div>
               <div class="input-container">
                 <v-text-field
                   v-model="user.password"
+                  :rules="rules"
                   label="Password"
                   type="password"
                 ></v-text-field>
@@ -73,11 +78,16 @@
                 ></v-text-field>
               </div>
               <div class="input-container">
-                <v-text-field v-model="user.email" label="Email"></v-text-field>
+                <v-text-field
+                  v-model="user.email"
+                  :rules="rules"
+                  label="Email"
+                ></v-text-field>
               </div>
               <div class="input-container">
                 <v-text-field
                   v-model="user.password"
+                  :rules="rules"
                   label="Password"
                   type="password"
                 ></v-text-field>
@@ -119,6 +129,7 @@
               <div class="input-container">
                 <v-text-field
                   v-model="quotes._id"
+                  :rules="rules"
                   label="Quote Number"
                 ></v-text-field>
               </div>
@@ -151,10 +162,10 @@
             <h3>{{currentQuote.title}}</h3>
             <div class="customer-information">
               <h4>Customer Information:</h4>
-              <p>{{currentQuote.customer[0].name}}</p>
-              <p>{{currentQuote.customer[0].email}}</p>
-              <p>{{currentQuote.customer[0].phone}}</p>
-              <p>{{currentQuote.customer[0].address}}</p>
+              <p>{{currentQuote.customer.name}}</p>
+              <p>{{currentQuote.customer.email}}</p>
+              <p>{{currentQuote.customer.phone}}</p>
+              <p>{{currentQuote.customer.address}}</p>
             </div>
 
             <p>{{currentQuote.description}}</p>
@@ -263,6 +274,11 @@
           <!-- QUOTES PAGE -->
           <div v-if="currentPage === 'quotes'">
             <h1>ALL QUOTES</h1>
+            <div @click="setPage('newQuote')" class="new-quote">
+              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
+                >New Quote +</v-btn
+              >
+            </div>
             <div id="search-bar">
               <input
                 type="text"
@@ -308,36 +324,42 @@
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.name"
+                    :rules="rules"
                     label="Customer Name"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.email"
+                    :rules="rules"
                     label="Customer Email"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.phone"
+                    :rules="rules"
                     label="Customer Phone Number"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.address"
+                    :rules="rules"
                     label="Customer Address"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.title"
+                    :rules="rules"
                     label="Quote Title"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.description"
+                    :rules="rules"
                     label="description"
                   ></v-text-field>
                 </div>
@@ -355,24 +377,28 @@
                     <div class="item-container">
                       <v-text-field
                         v-model="item.name"
+                        :rules="rules"
                         label="title"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.description"
+                        :rules="rules"
                         label="description"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.quantity"
+                        :rules="rules"
                         label="quantity"
                       ></v-text-field>
                     </div>
                     <div class="item-container">
                       <v-text-field
                         v-model="item.unitPrice"
+                        :rules="rules"
                         label="Unit Price"
                       ></v-text-field>
                     </div>
@@ -383,12 +409,14 @@
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.comments"
+                    :rules="rules"
                     label="comment"
                   ></v-text-field>
                 </div>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.totalAmount"
+                    :rules="rules"
                     label="total"
                   ></v-text-field>
                 </div>

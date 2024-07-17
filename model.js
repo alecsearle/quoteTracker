@@ -6,26 +6,24 @@ mongoose.connect(process.env.DBPASSWORD);
 
 const QuoteSchema = Schema(
   {
-    customer: [
-      {
-        name: {
-          type: String,
-          required: [true, "Customer must have a name."],
-        },
-        email: {
-          type: String,
-          required: [true, "Customer must have an email."],
-        },
-        phone: {
-          type: String,
-          required: [true, "Customer must have a phone number."],
-        },
-        address: {
-          type: String,
-          required: [true, "Customer must have an address."],
-        },
+    customer: {
+      name: {
+        type: String,
+        required: [true, "Customer must have a name."],
       },
-    ],
+      email: {
+        type: String,
+        required: [true, "Customer must have an email."],
+      },
+      phone: {
+        type: String,
+        required: [true, "Customer must have a phone number."],
+      },
+      address: {
+        type: String,
+        required: [true, "Customer must have an address."],
+      },
+    },
     // status: {
     //   type: String,
     //   required: [true, "Quote must have a status."],
