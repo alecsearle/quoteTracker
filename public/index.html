@@ -236,7 +236,7 @@
 
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
-            <div @click="setPage('newQuote')" class="new-quote">
+            <div @click="setPage('newQuote');editOff();" class="new-quote">
               <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
                 >New Quote +</v-btn
               >
@@ -303,7 +303,7 @@
                   <p>{{quote.comments}}</p>
 
                   <div class="edit_delete">
-                    <button @click.stop="editQuote(quote)">Edit</button>
+                    <button @click.stop="editQuote(quote);setPage('editPage');">Edit</button>
                     <button
                       @click.stop="deleteQuote(quote._id)"
                       id="delete_button"
@@ -435,6 +435,122 @@
               </v-form>
             </div>
           </div>
+
+            <!-- Edit Quotes -->
+ <!-- NEW QUOTE -->
+ <div v-if="currentPage === 'editPage'">
+  <div class="form">
+    <v-form fast-fail @submit.prevent="saveQuote()">
+      <h3>Edit Quote</h3>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.customer.name"
+          :rules="rules"
+          label="Customer Name"
+        ></v-text-field>
+      </div>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.customer.email"
+          :rules="rules"
+          label="Customer Email"
+        ></v-text-field>
+      </div>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.customer.phone"
+          :rules="rules"
+          label="Customer Phone Number"
+        ></v-text-field>
+      </div>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.customer.address"
+          :rules="rules"
+          label="Customer Address"
+        ></v-text-field>
+      </div>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.title"
+          :rules="rules"
+          label="Quote Title"
+        ></v-text-field>
+      </div>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.description"
+          :rules="rules"
+          label="description"
+        ></v-text-field>
+      </div>
+      <!-- <div class="input-container">
+        <v-text-field
+          v-model="newQuote.createdAt"
+          :rules="rules"
+          label="created at"
+        ></v-text-field>
+      </div> -->
+      <!-- items in quote -->
+      <div class="input-container">
+        <div v-for="(item, index) in newItems">
+          <p>Item</p>
+          <div class="item-container">
+            <v-text-field
+              v-model="item.name"
+              :rules="rules"
+              label="title"
+            ></v-text-field>
+          </div>
+          <div class="item-container">
+            <v-text-field
+              v-model="item.description"
+              :rules="rules"
+              label="description"
+            ></v-text-field>
+          </div>
+          <div class="item-container">
+            <v-text-field
+              v-model="item.quantity"
+              :rules="rules"
+              label="quantity"
+            ></v-text-field>
+          </div>
+          <div class="item-container">
+            <v-text-field
+              v-model="item.unitPrice"
+              :rules="rules"
+              label="Unit Price"
+            ></v-text-field>
+          </div>
+          <v-btn @click="deleteItem(index)">X</v-btn>
+        </div>
+        <v-btn @click="createItem()">Add Item</v-btn>
+      </div>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.comments"
+          :rules="rules"
+          label="comment"
+        ></v-text-field>
+      </div>
+      <div class="input-container">
+        <v-text-field
+          v-model="newQuote.totalAmount"
+          :rules="rules"
+          label="total"
+        ></v-text-field>
+      </div>
+      <div class="submit">
+        <v-btn
+          variant="tonal"
+          rounded="lg"
+          v-ripple
+          size="x-large"
+          type="submit"
+          >Save Quote</v-btn
+        >
+      </div>
 
           <!-- COMPANY STATS -->
           <div v-if="currentPage === 'stats'">
