@@ -38,6 +38,7 @@ Vue.createApp({
           totalPrice: "",
         },
       ],
+      searchInput: "",
       editingQuote: false,
       quotes: [],
       deletedQuotes: [],
@@ -259,19 +260,22 @@ Vue.createApp({
   computed: {
     balance: function () {
       let total = 0;
-      for (let i = 0; i < this.filteredExpenses.length; i++) {
-        total += this.filteredExpenses[i].amount;
+      for (let i = 0; i < this.filteredQuotes.length; i++) {
+        total += this.filteredQuotes[i].amount;
       }
       return total;
     },
-    filteredExpenses: function () {
-      return this.expenses.filter((expense) => {
-        return (
-          "description" in expense &&
-          expense.description
-            .toLowerCase()
-            .includes(this.searchInput.toLowerCase())
-        );
+    filteredQuotes: function () {
+      return this.quotes.filter((quote) => {
+        return quote.title
+          .toLowerCase()
+          .includes(this.searchInput.toLowerCase());
+        // return (
+        //   "description" in expense &&
+        //   expense.description
+        //     .toLowerCase()
+        //     .includes(this.searchInput.toLowerCase())
+        // );
       });
     },
   },
