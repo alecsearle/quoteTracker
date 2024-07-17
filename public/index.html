@@ -402,6 +402,13 @@
                         label="Unit Price"
                       ></v-text-field>
                     </div>
+                    <div class="item-container">
+                      <v-text-field
+                        v-model="item.totalPrice"
+                        :rules="rules"
+                        label="Total Price"
+                      ></v-text-field>
+                    </div>
                     <v-btn @click="deleteItem(index)">X</v-btn>
                   </div>
                   <v-btn @click="createItem()">Add Item</v-btn>
@@ -521,6 +528,13 @@
               v-model="item.unitPrice"
               :rules="rules"
               label="Unit Price"
+            ></v-text-field>
+          </div>
+          <div class="item-container">
+            <v-text-field
+              v-model="item.totalPrice"
+              :rules="rules"
+              label="Total Price"
             ></v-text-field>
           </div>
           <v-btn @click="deleteItem(index)">X</v-btn>

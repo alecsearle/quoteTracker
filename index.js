@@ -182,6 +182,7 @@ app.put("/quotes/:quoteID", AuthMiddleware, async function (req, res) {
     if (req.session.companyID !== quote.owner._id.toString()) {
       return res.status(403).send("Forbidden.");
     }
+    console.log("PUT body is ", req.body)
     quote.customer = req.body.customer;
     quote.title = req.body.title;
     quote.items = req.body.items;
@@ -189,15 +190,17 @@ app.put("/quotes/:quoteID", AuthMiddleware, async function (req, res) {
 
     const errors = await quote.validateSync();
     if (errors) {
+      console.log(errors)
       return res.status(422).send(errors);
     }
     await quote.save();
-    res.status(200).send("Quote updated.");
+    res.status(204).send("Quote updated.");
   } catch (error) {
     console.log(error);
     res.status(500).send("Bad request.");
   }
 });
+
 
 app.listen(8080, () => {
   console.log("Server is running on port 8080.");
