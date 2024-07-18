@@ -191,7 +191,7 @@ Vue.createApp({
         },
         title: "",
         description: "",
-        status: "created",
+        status: "",
         totalAmount: "",
         createdAt: "",
         items: [],

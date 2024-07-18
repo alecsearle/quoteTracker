@@ -44,10 +44,10 @@ const QuoteSchema = Schema(
       type: String,
     },
 
-    // status: {
-    //   type: String,
-
-    // }
+    status: {
+      type: String,
+      required: [true, "Quote must have a status"],
+    },
 
     owner: {
       type: Schema.Types.ObjectId,
@@ -62,7 +62,6 @@ const QuoteSchema = Schema(
         },
         description: {
           type: String,
-          required: [true, "Quote item must have a description."],
         },
         quantity: {
           type: Number,

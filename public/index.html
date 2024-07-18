@@ -243,7 +243,7 @@
             </div>
             <h3>Recent Quotes</h3>
             <div class="thumbnails">
-              <div v-for="quote in quotes.slice(0,4)">
+              <div v-for="quote in quotes.slice(0,3)">
                 <div
                   v-if="quote.owner === currentUser.companyID"
                   class="quote-thumbnail"
@@ -251,8 +251,8 @@
                   <h5>{{quote._id}}</h5>
                   <h3>{{quote.title}}</h3>
                   <p>{{quote.description}}</p>
-                  <p>{{quote.customer.name}}</p>
                   <p>{{quote.status}}</p>
+                  <p>{{quote.customer.name}}</p>
                   <p>{{quote.createdAt}}</p>
                   <h4>${{quote.totalAmount}}</h4>
                   <p>{{quote.comments}}</p>
@@ -281,14 +281,19 @@
             </div>
             <!-- Can search by customer(name,phone,email),
               and quote(title, id, description) -->
-            <div id="search-bar">
-              <input
+            <div class="search-bar">
+              <v-text-field
                 type="text"
                 placeholder="Search..."
                 v-model="searchInput"
-              />
-              <p id="clear-search">X</p>
+                class="search-input"
+              ></v-text-field>
+              <p class="clear-search">Clear</p>
             </div>
+            <p>
+              Search Using: customer(name,phone,email), and quote(title, id,
+              description)
+            </p>
             <div class="thumbnails">
               <div v-for="(quote, index) in filteredQuotes">
                 <div
@@ -298,8 +303,8 @@
                   <h5>{{quote._id}}</h5>
                   <h3>{{quote.title}}</h3>
                   <p>{{quote.description}}</p>
-                  <p>{{quote.customer.name}}</p>
                   <p>{{quote.status}}</p>
+                  <p>{{quote.customer.name}}</p>
                   <p>{{quote.createdAt}}</p>
                   <h4>${{quote.totalAmount}}</h4>
                   <p>{{quote.comments}}</p>
@@ -366,6 +371,15 @@
                     :rules="rules"
                     label="description"
                   ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-select
+                    v-model="newQuote.status"
+                    :rules="rules"
+                    density="default"
+                    label="Quote Status"
+                    :items="['Awaiting Response', 'In Progress', 'Complete']"
+                  ></v-select>
                 </div>
                 <div class="input-container">
                   <div v-for="(item, index) in newItems">
@@ -485,6 +499,14 @@
                     :rules="rules"
                     label="description"
                   ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-select
+                    v-model="newQuote.status"
+                    :rules="rules"
+                    label="Quote Status"
+                    :items="['Awaiting Response', 'In Progress', 'Complete']"
+                  ></v-select>
                 </div>
                 <div class="input-container">
                   <div v-for="(item, index) in newItems">

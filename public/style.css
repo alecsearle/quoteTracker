@@ -75,7 +75,7 @@ nav {
 
 .quote-thumbnail {
   width: 400px;
-  height: 200px;
+  height: auto;
   padding: 1rem;
   margin: 0.5rem;
   padding-bottom: 2rem;
@@ -97,3 +97,34 @@ nav {
   justify-content: center;
   border: 1px solid black;
 }
+
+.search-bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.search-input {
+  color: var(--mainBlue);
+}
+
+/* .search-bar {
+  display: flex;
+  flex-direction: row;
+}
+.search-input {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  gap: 1rem;
+  width: 300px;
+  color: var(--mainBlue);
+}
+.clear-search {
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: auto;
+} */
