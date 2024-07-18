@@ -44,6 +44,11 @@ const QuoteSchema = Schema(
       type: String,
     },
 
+    // status: {
+    //   type: String,
+
+    // }
+
     owner: {
       type: Schema.Types.ObjectId,
       ref: "Company",

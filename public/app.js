@@ -56,6 +56,7 @@ Vue.createApp({
   methods: {
     setPage: function (page) {
       this.currentPage = page;
+      console.log("on " + this.currentPage + " page");
     },
 
     createItem: function () {
@@ -235,10 +236,10 @@ Vue.createApp({
     saveQuote: async function () {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      console.log(myHeaders)
+      console.log(myHeaders);
 
       this.newQuote.items = this.newItems;
-      console.log(this.newQuote)
+      console.log(this.newQuote);
       let requestOptions = {
         method: "PUT",
         headers: myHeaders,
@@ -260,7 +261,7 @@ Vue.createApp({
     editOff: function () {
       this.editingQuote = false;
       this.clearQuote();
-    }
+    },
   },
   computed: {
     balance: function () {
@@ -272,15 +273,22 @@ Vue.createApp({
     },
     filteredQuotes: function () {
       return this.quotes.filter((quote) => {
-        return quote.title
-          .toLowerCase()
-          .includes(this.searchInput.toLowerCase());
-        // return (
-        //   "description" in expense &&
-        //   expense.description
-        //     .toLowerCase()
-        //     .includes(this.searchInput.toLowerCase())
-        // );
+        return (
+          quote.title.toLowerCase().includes(this.searchInput.toLowerCase()) ||
+          quote.customer.name
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          quote.customer.phone
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          quote.customer.email
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          quote.description
+            .toLowerCase()
+            .includes(this.searchInput.toLowerCase()) ||
+          quote._id.toLowerCase().includes(this.searchInput.toLowerCase())
+        );
       });
     },
   },
