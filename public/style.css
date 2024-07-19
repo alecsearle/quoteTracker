@@ -98,33 +98,19 @@ nav {
   border: 1px solid black;
 }
 
+/* SEARCH */
 .search-bar {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  width: 50%;
 }
 
-.search-input {
+.quote-status-search {
   color: var(--mainBlue);
+  display: flex;
+  gap: 0.5rem;
 }
 
-/* .search-bar {
-  display: flex;
-  flex-direction: row;
-}
-.search-input {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: row;
-  gap: 1rem;
-  width: 300px;
-  color: var(--mainBlue);
-}
 .clear-search {
-  border: 1px solid black;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: auto;
-  height: auto;
-} */
+  height: 55px !important;
+}

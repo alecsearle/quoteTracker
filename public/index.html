@@ -281,19 +281,52 @@
             </div>
             <!-- Can search by customer(name,phone,email),
               and quote(title, id, description) -->
+            <!-- <div class="search-function">
+              <div class="search-bar">
+                <v-text-field
+                  type="text"
+                  placeholder="Search... customer(name,phone,email), and quote(title, id, description)"
+                  v-model="searchInput"
+                ></v-text-field>
+                <v-btn
+                  variant="outlined"
+                  rounded="sm"
+                  v-ripple
+                  class="clear-search"
+                  >Clear</v-btn
+                >
+              </div>
+              <div class="quote-status-search">
+                <v-btn variant="outlined" rounded="lg" size="large" v-ripple
+                  >Awaiting Response</v-btn
+                ><v-btn variant="outlined" rounded="lg" size="large" v-ripple
+                  >In Progress</v-btn
+                ><v-btn variant="outlined" rounded="lg" size="large" v-ripple
+                  >Completed</v-btn
+                >
+              </div>
+            </div> -->
             <div class="search-bar">
-              <v-text-field
-                type="text"
-                placeholder="Search..."
-                v-model="searchInput"
-                class="search-input"
-              ></v-text-field>
-              <p class="clear-search">Clear</p>
+              <div class="search-input">
+                <v-text-field
+                  type="text"
+                  placeholder="Search... customer(name,phone,email), and quote(title, id, description)"
+                  v-model="searchInput"
+                ></v-text-field>
+                <p class="clear-search">Clear</p>
+              </div>
+              <p>Or search by Quote Status</p>
+              <div class="quote-status-search">
+                <!-- NEED TO ADD STATUS SEARCH FUNCTIONALITY -->
+                <v-btn variant="outlined" rounded="lg" size="small" v-ripple
+                  >Awaiting Response</v-btn
+                ><v-btn variant="outlined" rounded="lg" size="small" v-ripple
+                  >In Progress</v-btn
+                ><v-btn variant="outlined" rounded="lg" size="small" v-ripple
+                  >Completed</v-btn
+                >
+              </div>
             </div>
-            <p>
-              Search Using: customer(name,phone,email), and quote(title, id,
-              description)
-            </p>
             <div class="thumbnails">
               <div v-for="(quote, index) in filteredQuotes">
                 <div
