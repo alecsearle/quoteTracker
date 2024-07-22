@@ -20,7 +20,7 @@
           <!-- LOGIN -->
           <div v-if="currentPage === 'login'" class="login">
             <v-form fast-fail @submit.prevent="loginUser()">
-              <h3>Login</h3>
+              <h2>Login</h2>
               <div class="input-container">
                 <v-text-field
                   v-model="user.email"
@@ -43,6 +43,7 @@
                   v-ripple
                   size="x-large"
                   type="submit"
+                  class="button"
                   >Login</v-btn
                 >
               </div>
@@ -50,14 +51,22 @@
               <div class="buttons">
                 <p>
                   <span @click="setPage('findQuote')">
-                    <v-btn variant="outlined" rounded="lg" v-ripple
+                    <v-btn
+                      variant="outlined"
+                      rounded="lg"
+                      v-ripple
+                      class="button"
                       >View Quote</v-btn
                     ></span
                   >
                 </p>
                 <p>
                   <span @click="setPage('register')"
-                    ><v-btn variant="outlined" rounded="lg" v-ripple
+                    ><v-btn
+                      variant="outlined"
+                      rounded="lg"
+                      v-ripple
+                      class="button"
                       >Register Buisness</v-btn
                     ></span
                   >
@@ -69,7 +78,7 @@
           <!-- REGISTER -->
           <div v-if="currentPage === 'register'">
             <v-form fast-fail @submit.prevent="registerUser()">
-              <h3>Register</h3>
+              <h2>Register</h2>
               <div class="input-container">
                 <v-text-field
                   v-model="user.companyName"
@@ -99,6 +108,7 @@
                   v-ripple
                   size="x-large"
                   type="submit"
+                  class="button"
                   >Register</v-btn
                 >
               </div>
@@ -106,14 +116,22 @@
               <div class="buttons">
                 <p>
                   <span @click="setPage('findQuote')">
-                    <v-btn variant="outlined" rounded="lg" v-ripple
+                    <v-btn
+                      variant="outlined"
+                      rounded="lg"
+                      v-ripple
+                      class="button"
                       >View Quote</v-btn
                     ></span
                   >
                 </p>
                 <p>
                   <span @click="setPage('login')"
-                    ><v-btn variant="outlined" rounded="lg" v-ripple
+                    ><v-btn
+                      variant="outlined"
+                      rounded="lg"
+                      v-ripple
+                      class="button"
                       >Login</v-btn
                     ></span
                   >
@@ -125,7 +143,7 @@
           <!-- FIND QUOTE -->
           <div v-if="currentPage === 'findQuote'">
             <v-form fast-fail @submit.prevent="getQuote(quotes._id)">
-              <h3>Find a Quote</h3>
+              <h2>Find a Quote</h2>
               <div class="input-container">
                 <v-text-field
                   v-model="quotes._id"
@@ -140,6 +158,7 @@
                   v-ripple
                   size="x-large"
                   type="submit"
+                  class="button"
                   >Find Quote</v-btn
                 >
               </div>
@@ -147,7 +166,11 @@
               <div class="buttons">
                 <p>
                   <span @click="setPage('login')"
-                    ><v-btn variant="outlined" rounded="lg" v-ripple
+                    ><v-btn
+                      variant="outlined"
+                      rounded="lg"
+                      v-ripple
+                      class="button"
                       >Back</v-btn
                     ></span
                   >
@@ -158,8 +181,28 @@
 
           <!-- CUSTOMER QUOTE -->
           <div v-if="currentPage === 'customerQuote'" class="customer-quote">
+            <v-btn
+              variant="outlined"
+              rounded="lg"
+              size="x-large"
+              v-ripple
+              v-if="currentUser"
+              @click="setPage('home')"
+              class="button"
+              >Back</v-btn
+            >
+            <v-btn
+              variant="outlined"
+              rounded="lg"
+              size="x-large"
+              v-ripple
+              v-else="!currentUser"
+              @click="setPage('findQuote')"
+              class="button"
+              >Back</v-btn
+            >
             <h1>{{quotes._id}}</h1>
-            <h3>{{currentQuote.title}}</h3>
+            <h2>{{currentQuote.title}}</h2>
             <div class="customer-information">
               <h4>Customer Information:</h4>
               <p>{{currentQuote.customer.name}}</p>
@@ -186,8 +229,12 @@
           <nav
             v-if="currentPage !== 'login' && currentPage !=='register' && currentPage !=='findQuote' && currentPage !== 'customerQuote'"
           >
-            <h1 @click="setPage('home')">QuoteTracker</h1>
-            <p v-if="currentUser">welcome, {{currentUser.companyName}}</p>
+            <img
+              src="qtLogo.png"
+              alt="Quote Tracker Logo"
+              width="100px"
+              @click="setPage('home')"
+            />
             <div class="nav-selectors">
               <v-btn
                 @click="setPage('home')"
@@ -196,6 +243,7 @@
                 rounded="lg"
                 v-ripple
                 size="x-large"
+                class="button"
                 >HOME</v-btn
               >
               <v-btn
@@ -205,6 +253,7 @@
                 rounded="lg"
                 v-ripple
                 size="x-large"
+                class="button"
                 >QUOTES</v-btn
               >
               <v-btn
@@ -214,6 +263,7 @@
                 rounded="lg"
                 v-ripple
                 size="x-large"
+                class="button"
                 >COMPANY STATS</v-btn
               >
             </div>
@@ -224,6 +274,7 @@
               size="x-large"
               class="nav-button"
               @click="deleteSession()"
+              class="button"
               >LOGOUT</v-btn
             >
             <!-- <button
@@ -236,26 +287,37 @@
 
           <!-- HOME PAGE -->
           <div v-if="currentPage === 'home'">
+            <h1 v-if="currentUser" class="welcome-user">
+              Welcome, {{currentUser.companyName}}!
+            </h1>
+
             <div @click="setPage('newQuote');editOff();" class="new-quote">
-              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
+              <v-btn
+                variant="outlined"
+                rounded="lg"
+                size="x-large"
+                v-ripple
+                class="button"
                 >New Quote +</v-btn
               >
             </div>
-            <h3>Recent Quotes</h3>
+            <h2>Recent Quotes</h2>
             <div class="thumbnails">
               <div v-for="quote in quotes.slice(0,3)">
                 <div
                   v-if="quote.owner === currentUser.companyID"
                   class="quote-thumbnail"
+                  @click.stop="getQuote(quote._id)"
                 >
-                  <h5>{{quote._id}}</h5>
-                  <h3>{{quote.title}}</h3>
-                  <p>{{quote.description}}</p>
-                  <p>{{quote.status}}</p>
-                  <p>{{quote.customer.name}}</p>
-                  <p>{{quote.createdAt}}</p>
-                  <h4>${{quote.totalAmount}}</h4>
-                  <p>{{quote.comments}}</p>
+                  <div @click="setPage('customerQuote')">
+                    <h3>{{quote._id}}</h3>
+                    <h2>{{quote.title}}</h2>
+                    <p>{{quote.description}}</p>
+                    <h3>{{quote.customer.name}}</h3>
+                    <p>{{quote.customer.phone}}</p>
+                    <h3>${{quote.totalAmount}}</h3>
+                    <h3>{{quote.status}}</h3>
+                  </div>
 
                   <div class="edit_delete">
                     <button @click.stop="editQuote(quote)">Edit</button>
@@ -275,37 +337,15 @@
           <div v-if="currentPage === 'quotes'">
             <h1>ALL QUOTES</h1>
             <div @click="setPage('newQuote')" class="new-quote">
-              <v-btn variant="outlined" rounded="lg" size="x-large" v-ripple
+              <v-btn
+                variant="outlined"
+                rounded="lg"
+                size="x-large"
+                v-ripple
+                class="button"
                 >New Quote +</v-btn
               >
             </div>
-            <!-- Can search by customer(name,phone,email),
-              and quote(title, id, description) -->
-            <!-- <div class="search-function">
-              <div class="search-bar">
-                <v-text-field
-                  type="text"
-                  placeholder="Search... customer(name,phone,email), and quote(title, id, description)"
-                  v-model="searchInput"
-                ></v-text-field>
-                <v-btn
-                  variant="outlined"
-                  rounded="sm"
-                  v-ripple
-                  class="clear-search"
-                  >Clear</v-btn
-                >
-              </div>
-              <div class="quote-status-search">
-                <v-btn variant="outlined" rounded="lg" size="large" v-ripple
-                  >Awaiting Response</v-btn
-                ><v-btn variant="outlined" rounded="lg" size="large" v-ripple
-                  >In Progress</v-btn
-                ><v-btn variant="outlined" rounded="lg" size="large" v-ripple
-                  >Completed</v-btn
-                >
-              </div>
-            </div> -->
             <div class="search-bar">
               <div class="search-input">
                 <v-text-field
@@ -318,11 +358,26 @@
               <p>Or search by Quote Status</p>
               <div class="quote-status-search">
                 <!-- NEED TO ADD STATUS SEARCH FUNCTIONALITY -->
-                <v-btn variant="outlined" rounded="lg" size="small" v-ripple
+                <v-btn
+                  variant="outlined"
+                  rounded="lg"
+                  size="small"
+                  v-ripple
+                  class="button"
                   >Awaiting Response</v-btn
-                ><v-btn variant="outlined" rounded="lg" size="small" v-ripple
+                ><v-btn
+                  variant="outlined"
+                  rounded="lg"
+                  size="small"
+                  v-ripple
+                  class="button"
                   >In Progress</v-btn
-                ><v-btn variant="outlined" rounded="lg" size="small" v-ripple
+                ><v-btn
+                  variant="outlined"
+                  rounded="lg"
+                  size="small"
+                  v-ripple
+                  class="button"
                   >Completed</v-btn
                 >
               </div>
@@ -332,15 +387,17 @@
                 <div
                   v-if="quote.owner === currentUser.companyID"
                   class="quote-thumbnail"
+                  @click.stop="getQuote(quote._id)"
                 >
-                  <h5>{{quote._id}}</h5>
-                  <h3>{{quote.title}}</h3>
-                  <p>{{quote.description}}</p>
-                  <p>{{quote.status}}</p>
-                  <p>{{quote.customer.name}}</p>
-                  <p>{{quote.createdAt}}</p>
-                  <h4>${{quote.totalAmount}}</h4>
-                  <p>{{quote.comments}}</p>
+                  <div @click="setPage('customerQuote')">
+                    <h3>{{quote._id}}</h3>
+                    <h2>{{quote.title}}</h2>
+                    <p>{{quote.description}}</p>
+                    <h3>{{quote.customer.name}}</h3>
+                    <p>{{quote.customer.phone}}</p>
+                    <h3>${{quote.totalAmount}}</h3>
+                    <h3>{{quote.status}}</h3>
+                  </div>
 
                   <div class="edit_delete">
                     <button @click.stop="editQuote(quote);setPage('editPage');">
@@ -362,7 +419,7 @@
           <div v-if="currentPage === 'newQuote'">
             <div class="form">
               <v-form fast-fail @submit.prevent="createQuote()">
-                <h3>New Quote</h3>
+                <h2>New Quote</h2>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.name"
@@ -452,9 +509,9 @@
                         label="Total Price"
                       ></v-text-field>
                     </div>
-                    <v-btn @click="deleteItem(index)">X</v-btn>
+                    <v-btn @click="deleteItem(index)" class="button">X</v-btn>
                   </div>
-                  <v-btn @click="createItem()">Add Item</v-btn>
+                  <v-btn @click="createItem()" class="button">Add Item</v-btn>
                 </div>
                 <div class="input-container">
                   <v-text-field
@@ -477,6 +534,7 @@
                     v-ripple
                     size="x-large"
                     type="submit"
+                    class="button"
                     >Submit Quote</v-btn
                   >
                 </div>
@@ -490,7 +548,7 @@
           <div v-if="currentPage === 'editPage'">
             <div class="form">
               <v-form fast-fail @submit.prevent="saveQuote()">
-                <h3>Edit Quote</h3>
+                <h2>Edit Quote</h2>
                 <div class="input-container">
                   <v-text-field
                     v-model="newQuote.customer.name"
@@ -579,9 +637,9 @@
                         label="Total Price"
                       ></v-text-field>
                     </div>
-                    <v-btn @click="deleteItem(index)">X</v-btn>
+                    <v-btn @click="deleteItem(index)" class="button">X</v-btn>
                   </div>
-                  <v-btn @click="createItem()">Add Item</v-btn>
+                  <v-btn @click="createItem()" class="button">Add Item</v-btn>
                 </div>
                 <div class="input-container">
                   <v-text-field
@@ -604,6 +662,7 @@
                     v-ripple
                     size="x-large"
                     type="submit"
+                    class="button"
                     >Save Quote</v-btn
                   >
                 </div>
@@ -612,7 +671,7 @@
           </div>
           <!-- COMPANY STATS -->
           <div v-if="currentPage === 'stats'">
-            <h3>Company Stats</h3>
+            <h2>Company Stats</h2>
           </div>
         </v-main>
       </v-app>
