@@ -262,6 +262,11 @@ Vue.createApp({
       this.editingQuote = false;
       this.clearQuote();
     },
+    calculateTotal: function( quantity, unitPrice) {
+      
+       return  quantity * unitPrice
+      
+    }
   },
   computed: {
     balance: function () {
