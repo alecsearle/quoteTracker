@@ -1,6 +1,8 @@
 :root {
   --mainBlue: #1f7aab;
-  --hover: #1f7aab;
+  --hover: #d7bf8b;
+  /* 45446D */
+  /* cream:c7ac71 */
 }
 
 body {
@@ -25,7 +27,7 @@ form {
   width: 300px;
   color: var(--mainBlue);
 }
-h3 {
+h2 {
   color: var(--mainBlue);
   font-size: 2rem;
   padding-bottom: 1rem;
@@ -59,8 +61,14 @@ nav {
 .nav-button:hover {
   background-color: var(--hover);
 }
+.button:hover {
+  background-color: var(--hover);
+}
 
 /* HOME PAGE */
+.welcome-user {
+  padding-top: 2rem;
+}
 .new-quote {
   padding: 1rem 1rem 1rem 0rem;
 }
