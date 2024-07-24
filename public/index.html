@@ -10,6 +10,7 @@
       href="https://cdn.jsdelivr.net/npm/vuetify@3.6.11/dist/vuetify.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/vuetify@3.6.11/dist/vuetify.min.js"></script>
+
     <title>Quote Tracker</title>
   </head>
   <body>
@@ -290,6 +291,16 @@
             <h1 v-if="currentUser" class="welcome-user">
               Welcome, {{currentUser.companyName}}!
             </h1>
+            <div class="calendar">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23039BE5&showTz=0&src=YzFlMzYzODk0YzljNzM1ZDA3ZmIyNjQ1NzBkMDQzMjg5ZGFiZTIyZjRlNDgyOGYwZTI1YmYyMzE4ZGJkNjIwYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
+                style="border-width: 0"
+                width="1000"
+                height="500"
+                frameborder="0"
+                scrolling="no"
+              ></iframe>
+            </div>
 
             <div @click="setPage('newQuote');editOff();" class="new-quote">
               <v-btn
@@ -417,255 +428,303 @@
 
           <!-- NEW QUOTE -->
           <div v-if="currentPage === 'newQuote'">
-            <div class="form">
+            <div class="quote-form">
               <v-form fast-fail @submit.prevent="createQuote()">
                 <h2>New Quote</h2>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.name"
-                    :rules="rules"
-                    label="Customer Name"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.email"
-                    :rules="rules"
-                    label="Customer Email"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.phone"
-                    :rules="rules"
-                    label="Customer Phone Number"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.address"
-                    :rules="rules"
-                    label="Customer Address"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.title"
-                    :rules="rules"
-                    label="Quote Title"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.description"
-                    :rules="rules"
-                    label="description"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-select
-                    v-model="newQuote.status"
-                    :rules="rules"
-                    density="default"
-                    label="Quote Status"
-                    :items="['Awaiting Response', 'In Progress', 'Complete']"
-                  ></v-select>
-                </div>
-                <div class="input-container">
-                  <div v-for="(item, index) in newItems">
-                    <p>Item</p>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.name"
-                        :rules="rules"
-                        label="title"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.description"
-                        :rules="rules"
-                        label="description"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.quantity"
-                        :rules="rules"
-                        label="quantity"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.unitPrice"
-                        :rules="rules"
-                        label="Unit Price"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.totalPrice"
-                        :rules="rules"
-                        label="Total Price"
-                      ></v-text-field>
-                      <!-- <p>{{calculateTotal(item.quantity, item.unitPrice)}}</p> -->
-                    </div>
-                    <v-btn @click="deleteItem(index)" class="button">X</v-btn>
+                <div class="customer-info">
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.name"
+                      :rules="rules"
+                      label="Customer Name"
+                    ></v-text-field>
                   </div>
-                  <v-btn @click="createItem()" class="button">Add Item</v-btn>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.email"
+                      :rules="rules"
+                      label="Customer Email"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.phone"
+                      :rules="rules"
+                      label="Customer Phone Number"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.address"
+                      :rules="rules"
+                      label="Customer Address"
+                    ></v-text-field>
+                  </div>
                 </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.comments"
-                    :rules="rules"
-                    label="comment"
-                  ></v-text-field>
+
+                <br />
+                <hr />
+                <br />
+
+                <div class="quote-info">
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.title"
+                      :rules="rules"
+                      label="Quote Title"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.description"
+                      :rules="rules"
+                      label="description"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-select
+                      v-model="newQuote.status"
+                      :rules="rules"
+                      density="default"
+                      label="Quote Status"
+                      :items="['Awaiting Response', 'In Progress', 'Complete']"
+                    ></v-select>
+                  </div>
+                  <div class="input-container">
+                    <div v-for="(item, index) in newItems">
+                      <h4>Item</h4>
+                      <div class="item-container">
+                        <v-text-field
+                          v-model="item.name"
+                          :rules="rules"
+                          label="title"
+                        ></v-text-field>
+                      </div>
+                      <div class="item-container">
+                        <v-text-field
+                          v-model="item.description"
+                          :rules="rules"
+                          label="description"
+                        ></v-text-field>
+                      </div>
+                      <div class="item-pricing">
+                        <div class="item-container">
+                          <v-text-field
+                            v-model="item.quantity"
+                            :rules="rules"
+                            label="quantity"
+                            width="170px"
+                          ></v-text-field>
+                        </div>
+                        <div class="item-container">
+                          <v-text-field
+                            v-model="item.unitPrice"
+                            :rules="rules"
+                            label="Unit Price"
+                            width="170px"
+                          ></v-text-field>
+                        </div>
+                      </div>
+
+                      <div class="item-container">
+                        <v-text-field
+                          v-model="item.totalPrice"
+                          :rules="rules"
+                          label="Total Price"
+                        ></v-text-field>
+                        <!-- <p>{{calculateTotal(item.quantity, item.unitPrice)}}</p> -->
+                      </div>
+                      <v-btn @click="deleteItem(index)" class="button">X</v-btn>
+                    </div>
+                    <br />
+                    <v-btn @click="createItem()" class="button">Add Item</v-btn>
+                  </div>
                 </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.totalAmount"
-                    :rules="rules"
-                    label="total"
-                  ></v-text-field>
+
+                <br />
+                <hr />
+                <br />
+
+                <div class="quote-total">
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.comments"
+                      :rules="rules"
+                      label="comment"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.totalAmount"
+                      :rules="rules"
+                      label="total"
+                    ></v-text-field>
+                  </div>
+                  <div class="submit">
+                    <v-btn
+                      variant="tonal"
+                      rounded="lg"
+                      v-ripple
+                      size="x-large"
+                      type="submit"
+                      class="button"
+                      >Submit Quote</v-btn
+                    >
+                  </div>
+                  <div class="gap"></div>
+                  <div class="buttons"></div>
                 </div>
-                <div class="submit">
-                  <v-btn
-                    variant="tonal"
-                    rounded="lg"
-                    v-ripple
-                    size="x-large"
-                    type="submit"
-                    class="button"
-                    >Submit Quote</v-btn
-                  >
-                </div>
-                <div class="gap"></div>
-                <div class="buttons"></div>
               </v-form>
             </div>
           </div>
 
           <!-- EDIT QUOTES -->
           <div v-if="currentPage === 'editPage'">
-            <div class="form">
+            <div class="quote-form">
               <v-form fast-fail @submit.prevent="saveQuote()">
                 <h2>Edit Quote</h2>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.name"
-                    :rules="rules"
-                    label="Customer Name"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.email"
-                    :rules="rules"
-                    label="Customer Email"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.phone"
-                    :rules="rules"
-                    label="Customer Phone Number"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.customer.address"
-                    :rules="rules"
-                    label="Customer Address"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.title"
-                    :rules="rules"
-                    label="Quote Title"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.description"
-                    :rules="rules"
-                    label="description"
-                  ></v-text-field>
-                </div>
-                <div class="input-container">
-                  <v-select
-                    v-model="newQuote.status"
-                    :rules="rules"
-                    label="Quote Status"
-                    :items="['Awaiting Response', 'In Progress', 'Complete']"
-                  ></v-select>
-                </div>
-                <div class="input-container">
-                  <div v-for="(item, index) in newItems">
-                    <p>Item</p>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.name"
-                        :rules="rules"
-                        label="title"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.description"
-                        :rules="rules"
-                        label="description"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.quantity"
-                        :rules="rules"
-                        label="quantity"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.unitPrice"
-                        :rules="rules"
-                        label="Unit Price"
-                      ></v-text-field>
-                    </div>
-                    <div class="item-container">
-                      <v-text-field
-                        v-model="item.totalPrice"
-                        :rules="rules"
-                        label="Total Price"
-                      ></v-text-field>
-                    </div>
-                    <v-btn @click="deleteItem(index)" class="button">X</v-btn>
+                <div class="customer-info">
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.name"
+                      :rules="rules"
+                      label="Customer Name"
+                    ></v-text-field>
                   </div>
-                  <v-btn @click="createItem()" class="button">Add Item</v-btn>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.email"
+                      :rules="rules"
+                      label="Customer Email"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.phone"
+                      :rules="rules"
+                      label="Customer Phone Number"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.customer.address"
+                      :rules="rules"
+                      label="Customer Address"
+                    ></v-text-field>
+                  </div>
                 </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.comments"
-                    :rules="rules"
-                    label="comment"
-                  ></v-text-field>
+
+                <br />
+                <hr />
+                <br />
+
+                <div class="quote-info">
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.title"
+                      :rules="rules"
+                      label="Quote Title"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.description"
+                      :rules="rules"
+                      label="description"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-select
+                      v-model="newQuote.status"
+                      :rules="rules"
+                      density="default"
+                      label="Quote Status"
+                      :items="['Awaiting Response', 'In Progress', 'Complete']"
+                    ></v-select>
+                  </div>
+                  <div class="input-container">
+                    <div v-for="(item, index) in newItems">
+                      <h4>Item</h4>
+                      <div class="item-container">
+                        <v-text-field
+                          v-model="item.name"
+                          :rules="rules"
+                          label="title"
+                        ></v-text-field>
+                      </div>
+                      <div class="item-container">
+                        <v-text-field
+                          v-model="item.description"
+                          :rules="rules"
+                          label="description"
+                        ></v-text-field>
+                      </div>
+                      <div class="item-pricing">
+                        <div class="item-container">
+                          <v-text-field
+                            v-model="item.quantity"
+                            :rules="rules"
+                            label="quantity"
+                            width="170px"
+                          ></v-text-field>
+                        </div>
+                        <div class="item-container">
+                          <v-text-field
+                            v-model="item.unitPrice"
+                            :rules="rules"
+                            label="Unit Price"
+                            width="170px"
+                          ></v-text-field>
+                        </div>
+                      </div>
+
+                      <div class="item-container">
+                        <v-text-field
+                          v-model="item.totalPrice"
+                          :rules="rules"
+                          label="Total Price"
+                        ></v-text-field>
+                        <!-- <p>{{calculateTotal(item.quantity, item.unitPrice)}}</p> -->
+                      </div>
+                      <v-btn @click="deleteItem(index)" class="button">X</v-btn>
+                    </div>
+                    <br />
+                    <v-btn @click="createItem()" class="button">Add Item</v-btn>
+                  </div>
                 </div>
-                <div class="input-container">
-                  <v-text-field
-                    v-model="newQuote.totalAmount"
-                    :rules="rules"
-                    label="total"
-                  ></v-text-field>
-                </div>
-                <div class="submit">
-                  <v-btn
-                    variant="tonal"
-                    rounded="lg"
-                    v-ripple
-                    size="x-large"
-                    type="submit"
-                    class="button"
-                    >Save Quote</v-btn
-                  >
+
+                <br />
+                <hr />
+                <br />
+
+                <div class="quote-total">
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.comments"
+                      :rules="rules"
+                      label="comment"
+                    ></v-text-field>
+                  </div>
+                  <div class="input-container">
+                    <v-text-field
+                      v-model="newQuote.totalAmount"
+                      :rules="rules"
+                      label="total"
+                    ></v-text-field>
+                  </div>
+                  <div class="submit">
+                    <v-btn
+                      variant="tonal"
+                      rounded="lg"
+                      v-ripple
+                      size="x-large"
+                      type="submit"
+                      class="button"
+                      >Save Quote</v-btn
+                    >
+                  </div>
+                  <div class="gap"></div>
+                  <div class="buttons"></div>
                 </div>
               </v-form>
             </div>

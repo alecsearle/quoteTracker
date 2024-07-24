@@ -2,7 +2,7 @@
   --mainBlue: #1f7aab;
   --hover: #d7bf8b;
   /* 45446D */
-  /* cream:c7ac71 */
+  /* cream:d7bf8b */
 }
 
 body {
@@ -11,7 +11,7 @@ body {
 }
 
 /* Login & Register Page */
-form {
+.login-register-form {
   padding-top: 3rem;
   display: flex;
   justify-content: center;
@@ -69,6 +69,12 @@ nav {
 .welcome-user {
   padding-top: 2rem;
 }
+
+.calendar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .new-quote {
   padding: 1rem 1rem 1rem 0rem;
 }
@@ -104,6 +110,27 @@ nav {
   align-items: center;
   justify-content: center;
   border: 1px solid black;
+}
+
+/* NEW QUOTE PAGE */
+.quote-form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.customer-info {
+  background-color: beige;
+}
+.quote-info {
+  background-color: azure;
+}
+.item-pricing {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.quote-total {
+  background-color: antiquewhite;
 }
 
 /* SEARCH */
