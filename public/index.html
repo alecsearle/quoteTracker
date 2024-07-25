@@ -215,6 +215,7 @@
             <div class="line-items">
               <div class="row-head">
                 <h3>Product/Service</h3>
+                <h3>Description</h3>
                 <h3>Qty</h3>
                 <h3>Unit Cost</h3>
                 <h3>Total</h3>
@@ -223,7 +224,7 @@
               <br />
               <div v-for="item in currentQuote.items" class="row-body">
                 <h4>{{item.name}}</h4>
-                <!-- <p>{{item.description}}</p> -->
+                <p>{{item.description}}</p>
                 <p>{{item.quantity}}</p>
                 <p>${{item.unitPrice}}</p>
                 <p>${{item.totalPrice}}</p>
@@ -256,61 +257,6 @@
               class="button"
               >Back</v-btn
             >
-
-            <!-- <div class="line-item-headers">
-              <h4>Product/Service</h4>
-              <h4>Qty</h4>
-              <h4>Unit Cost</h4>
-              <h4>Total</h4>
-            </div>
-            <hr />
-            <div v-for="item in currentQuote.items" class="line-items">
-              <h4>{{item.name}}</h4> -->
-            <!-- <p>{{item.description}}</p>
-              <p>{{item.quantity}}</p>
-              <p>{{item.unitPrice}}</p>
-              <p>{{item.totalPrice}}</p>
-              <hr />
-            </div> -->
-            <!-- <h3>{{quotes._id}}</h3>
-            <h2>{{currentQuote.title}}</h2>
-            <hr />
-            
-            <hr />
-
-            <p>{{currentQuote.description}}</p>
-            <p>{{currentQuote.status}}</p>
-            <p>{{currentQuote.createdAt}}</p>
-            <div v-for="item in currentQuote.items">
-              <h4>{{item.name}}</h4>
-              <p>{{item.description}}</p>
-              <p>{{item.quantity}}</p>
-              <p>{{item.unitPrice}}</p>
-              <p>{{item.totalPrice}}</p>
-              <hr />
-            </div>
-            <h1>${{currentQuote.totalAmount}}</h1>
-            <p>{{currentQuote.comments}}</p>
-            <v-btn
-              variant="outlined"
-              rounded="lg"
-              size="x-large"
-              v-ripple
-              v-if="currentUser"
-              @click="setPage('home')"
-              class="button"
-              >Back</v-btn
-            >
-            <v-btn
-              variant="outlined"
-              rounded="lg"
-              size="x-large"
-              v-ripple
-              v-else="!currentUser"
-              @click="setPage('findQuote')"
-              class="button"
-              >Back</v-btn
-            > -->
           </div>
 
           <!-- NAV BAR -->
@@ -442,7 +388,6 @@
                   placeholder="Search... customer(name,phone,email), and quote(title, id, description)"
                   v-model="searchInput"
                 ></v-text-field>
-                <p class="clear-search">Clear</p>
               </div>
               <p>Or search by Quote Status</p>
               <div class="quote-status-search">
