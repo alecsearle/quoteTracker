@@ -3,7 +3,7 @@ const URL = "http://localhost:8080";
 Vue.createApp({
   data() {
     return {
-      currentPage: "login",
+      currentPage: "newQuote",
       user: {
         companyName: "",
         email: "",
@@ -182,7 +182,8 @@ Vue.createApp({
         console.log("successfully created a quote");
         console.log("id BEFORE calling sendMail()", this.quotes[0]._id);
         // this.saveQuote();
-        this.sendMail(data);
+        // this.sendMail(data);
+        //make sure to uncomment this out
       } else {
         console.log("failed to create a quote");
       }
@@ -287,9 +288,6 @@ Vue.createApp({
       this.editingQuote = false;
       this.clearQuote();
     },
-    // calculateTotal: function (quantity, unitPrice) {
-    //   return quantity * unitPrice;
-    // },
     calculateTotalPrice: function (item) {
       if (item.quantity && item.unitPrice){
         item.totalPrice = item.quantity * item.unitPrice
@@ -307,13 +305,6 @@ Vue.createApp({
     }
   },
   computed: {
-    balance: function () {
-      let total = 0;
-      for (let i = 0; i < this.filteredQuotes.length; i++) {
-        total += this.filteredQuotes[i].amount;
-      }
-      return total;
-    },
     filteredQuotes: function () {
       return this.quotes.filter((quote) => {
         return (
