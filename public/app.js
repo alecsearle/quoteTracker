@@ -1,4 +1,5 @@
 const URL = "http://localhost:8080";
+
 Vue.createApp({
   data() {
     return {
@@ -11,6 +12,7 @@ Vue.createApp({
       currentUser: null,
       currentQuote: {},
       newQuote: {
+        id: "",
         customer: {
           name: "",
           email: "",
@@ -57,6 +59,23 @@ Vue.createApp({
     setPage: function (page) {
       this.currentPage = page;
       console.log("on " + this.currentPage + " page");
+    },
+
+    sendMail: function (data) {
+      let tempParams = {
+        company_name: this.currentUser.companyName,
+        customer_name: data.customer.name,
+        customer_email: data.customer.email,
+        quote_id: data._id,
+      };
+      console.log("before sending", this.quotes[0]._id);
+      emailjs
+        .send("service_mailtrap", "template_9ovot2h", tempParams)
+        .then((res) => {
+          // Use arrow function here
+          console.log("success", res.status);
+          console.log("after sending", this.quotes[0]._id);
+        });
     },
 
     createItem: function () {
@@ -140,6 +159,7 @@ Vue.createApp({
         this.currentUser = null;
       }
     },
+
     createQuote: async function () {
       let myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
@@ -154,10 +174,15 @@ Vue.createApp({
       //make changes here
       let response = await fetch(`${URL}/quotes`, requestOptions);
       if (response.status === 201) {
+        let data = await response.json();
+        console.log(data);
         this.getQuotes();
         this.currentPage = "home";
         this.clearQuote();
         console.log("successfully created a quote");
+        console.log("id BEFORE calling sendMail()", this.quotes[0]._id);
+        // this.saveQuote();
+        this.sendMail(data);
       } else {
         console.log("failed to create a quote");
       }

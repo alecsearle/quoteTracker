@@ -10,7 +10,17 @@
       href="https://cdn.jsdelivr.net/npm/vuetify@3.6.11/dist/vuetify.min.css"
     />
     <script src="https://cdn.jsdelivr.net/npm/vuetify@3.6.11/dist/vuetify.min.js"></script>
-
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init({
+          publicKey: "c_FbZ7ufvTZEnSWwA",
+        });
+      })();
+    </script>
     <title>Quote Tracker</title>
   </head>
   <body>
@@ -20,164 +30,170 @@
           <div v-if="currentPage === 'loading'"></div>
           <!-- LOGIN -->
           <div v-if="currentPage === 'login'" class="login">
-            <v-form fast-fail @submit.prevent="loginUser()">
-              <h2>Login</h2>
-              <div class="input-container">
-                <v-text-field
-                  v-model="user.email"
-                  :rules="rules"
-                  label="Email"
-                ></v-text-field>
-              </div>
-              <div class="input-container">
-                <v-text-field
-                  v-model="user.password"
-                  :rules="rules"
-                  label="Password"
-                  type="password"
-                ></v-text-field>
-              </div>
-              <div class="submit">
-                <v-btn
-                  variant="tonal"
-                  rounded="lg"
-                  v-ripple
-                  size="x-large"
-                  type="submit"
-                  class="button"
-                  >Login</v-btn
-                >
-              </div>
-              <div class="gap"></div>
-              <div class="buttons">
-                <p>
-                  <span @click="setPage('findQuote')">
-                    <v-btn
-                      variant="outlined"
-                      rounded="lg"
-                      v-ripple
-                      class="button"
-                      >View Quote</v-btn
-                    ></span
+            <div class="login-register-form">
+              <v-form fast-fail @submit.prevent="loginUser()">
+                <h2>Login</h2>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.email"
+                    :rules="rules"
+                    label="Email"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.password"
+                    :rules="rules"
+                    label="Password"
+                    type="password"
+                  ></v-text-field>
+                </div>
+                <div class="submit">
+                  <v-btn
+                    variant="tonal"
+                    rounded="lg"
+                    v-ripple
+                    size="x-large"
+                    type="submit"
+                    class="button"
+                    >Login</v-btn
                   >
-                </p>
-                <p>
-                  <span @click="setPage('register')"
-                    ><v-btn
-                      variant="outlined"
-                      rounded="lg"
-                      v-ripple
-                      class="button"
-                      >Register Buisness</v-btn
-                    ></span
-                  >
-                </p>
-              </div>
-            </v-form>
+                </div>
+                <div class="gap"></div>
+                <div class="buttons">
+                  <p>
+                    <span @click="setPage('findQuote')">
+                      <v-btn
+                        variant="outlined"
+                        rounded="lg"
+                        v-ripple
+                        class="button"
+                        >View Quote</v-btn
+                      ></span
+                    >
+                  </p>
+                  <p>
+                    <span @click="setPage('register')"
+                      ><v-btn
+                        variant="outlined"
+                        rounded="lg"
+                        v-ripple
+                        class="button"
+                        >Register Buisness</v-btn
+                      ></span
+                    >
+                  </p>
+                </div>
+              </v-form>
+            </div>
           </div>
 
           <!-- REGISTER -->
           <div v-if="currentPage === 'register'">
-            <v-form fast-fail @submit.prevent="registerUser()">
-              <h2>Register</h2>
-              <div class="input-container">
-                <v-text-field
-                  v-model="user.companyName"
-                  :rules="companyNameRules"
-                  label="Company Name"
-                ></v-text-field>
-              </div>
-              <div class="input-container">
-                <v-text-field
-                  v-model="user.email"
-                  :rules="rules"
-                  label="Email"
-                ></v-text-field>
-              </div>
-              <div class="input-container">
-                <v-text-field
-                  v-model="user.password"
-                  :rules="rules"
-                  label="Password"
-                  type="password"
-                ></v-text-field>
-              </div>
-              <div class="submit">
-                <v-btn
-                  variant="tonal"
-                  rounded="lg"
-                  v-ripple
-                  size="x-large"
-                  type="submit"
-                  class="button"
-                  >Register</v-btn
-                >
-              </div>
-              <div class="gap"></div>
-              <div class="buttons">
-                <p>
-                  <span @click="setPage('findQuote')">
-                    <v-btn
-                      variant="outlined"
-                      rounded="lg"
-                      v-ripple
-                      class="button"
-                      >View Quote</v-btn
-                    ></span
+            <div class="login-register-form">
+              <v-form fast-fail @submit.prevent="registerUser()">
+                <h2>Register</h2>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.companyName"
+                    :rules="companyNameRules"
+                    label="Company Name"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.email"
+                    :rules="rules"
+                    label="Email"
+                  ></v-text-field>
+                </div>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="user.password"
+                    :rules="rules"
+                    label="Password"
+                    type="password"
+                  ></v-text-field>
+                </div>
+                <div class="submit">
+                  <v-btn
+                    variant="tonal"
+                    rounded="lg"
+                    v-ripple
+                    size="x-large"
+                    type="submit"
+                    class="button"
+                    >Register</v-btn
                   >
-                </p>
-                <p>
-                  <span @click="setPage('login')"
-                    ><v-btn
-                      variant="outlined"
-                      rounded="lg"
-                      v-ripple
-                      class="button"
-                      >Login</v-btn
-                    ></span
-                  >
-                </p>
-              </div>
-            </v-form>
+                </div>
+                <div class="gap"></div>
+                <div class="buttons">
+                  <p>
+                    <span @click="setPage('findQuote')">
+                      <v-btn
+                        variant="outlined"
+                        rounded="lg"
+                        v-ripple
+                        class="button"
+                        >View Quote</v-btn
+                      ></span
+                    >
+                  </p>
+                  <p>
+                    <span @click="setPage('login')"
+                      ><v-btn
+                        variant="outlined"
+                        rounded="lg"
+                        v-ripple
+                        class="button"
+                        >Login</v-btn
+                      ></span
+                    >
+                  </p>
+                </div>
+              </v-form>
+            </div>
           </div>
 
           <!-- FIND QUOTE -->
           <div v-if="currentPage === 'findQuote'">
-            <v-form fast-fail @submit.prevent="getQuote(quotes._id)">
-              <h2>Find a Quote</h2>
-              <div class="input-container">
-                <v-text-field
-                  v-model="quotes._id"
-                  :rules="rules"
-                  label="Quote Number"
-                ></v-text-field>
-              </div>
-              <div class="submit">
-                <v-btn
-                  variant="tonal"
-                  rounded="lg"
-                  v-ripple
-                  size="x-large"
-                  type="submit"
-                  class="button"
-                  >Find Quote</v-btn
-                >
-              </div>
-              <div class="gap"></div>
-              <div class="buttons">
-                <p>
-                  <span @click="setPage('login')"
-                    ><v-btn
-                      variant="outlined"
-                      rounded="lg"
-                      v-ripple
-                      class="button"
-                      >Back</v-btn
-                    ></span
+            <div class="login-register-form">
+              <v-form fast-fail @submit.prevent="getQuote(quotes._id)">
+                <h2>Find a Quote</h2>
+                <div class="input-container">
+                  <v-text-field
+                    v-model="quotes._id"
+                    :rules="rules"
+                    label="Quote Number"
+                  ></v-text-field>
+                </div>
+                <div class="submit">
+                  <v-btn
+                    variant="tonal"
+                    rounded="lg"
+                    v-ripple
+                    size="x-large"
+                    type="submit"
+                    class="button"
+                    >Find Quote</v-btn
                   >
-                </p>
-              </div>
-            </v-form>
+                </div>
+                <div class="gap"></div>
+                <div class="buttons">
+                  <p>
+                    <span @click="setPage('login')"
+                      ><v-btn
+                        variant="outlined"
+                        rounded="lg"
+                        v-ripple
+                        class="button"
+                        >Back</v-btn
+                      ></span
+                    >
+                  </p>
+                </div>
+              </v-form>
+            </div>
           </div>
 
           <!-- CUSTOMER QUOTE -->
@@ -431,12 +447,15 @@
             <div class="quote-form">
               <v-form fast-fail @submit.prevent="createQuote()">
                 <h2>New Quote</h2>
+                <div id="quoteID"></div>
+                <div id="currentUser"></div>
                 <div class="customer-info">
                   <div class="input-container">
                     <v-text-field
                       v-model="newQuote.customer.name"
                       :rules="rules"
                       label="Customer Name"
+                      id="customerName"
                     ></v-text-field>
                   </div>
                   <div class="input-container">
@@ -444,6 +463,7 @@
                       v-model="newQuote.customer.email"
                       :rules="rules"
                       label="Customer Email"
+                      id="customerEmail"
                     ></v-text-field>
                   </div>
                   <div class="input-container">

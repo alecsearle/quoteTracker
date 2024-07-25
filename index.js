@@ -133,7 +133,7 @@ app.post("/quotes", async function (req, res) {
     }
     await newQuote.populate("owner", "companyName");
     await newQuote.save();
-    res.status(201).send("Quote created.");
+    res.status(201).json(newQuote);
   } catch (error) {
     res.status(500).send("Bad request.");
     console.log(error);
@@ -206,5 +206,5 @@ app.put("/quotes/:quoteID", AuthMiddleware, async function (req, res) {
 });
 
 app.listen(8080, () => {
-  console.log("Server is running on port 8080.");
+  console.log("Server is running on localhost:8080.");
 });
