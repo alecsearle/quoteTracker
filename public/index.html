@@ -197,7 +197,45 @@
           </div>
 
           <!-- CUSTOMER QUOTE -->
-          <div v-if="currentPage === 'customerQuote'" class="customer-quote">
+          <div v-if="currentPage === 'customerQuote'">
+            <h1>Handyman Services</h1>
+            <div class="customer-quote">
+              <h2>{{currentQuote.title}}</h2>
+              <h5>{{currentQuote._id}}</h5>
+              <div class="customer-information">
+                <p>{{currentQuote.customer.name}}</p>
+                <p>{{currentQuote.customer.email}}</p>
+                <p>{{currentQuote.customer.phone}}</p>
+                <p>{{currentQuote.customer.address}}</p>
+              </div>
+            </div>
+            <br />
+            <br />
+
+            <div class="line-items">
+              <div class="row-head">
+                <h3>Product/Service</h3>
+                <h3>Qty</h3>
+                <h3>Unit Cost</h3>
+                <h3>Total</h3>
+              </div>
+              <hr />
+              <br />
+              <div v-for="item in currentQuote.items" class="row-body">
+                <h4>{{item.name}}</h4>
+                <!-- <p>{{item.description}}</p> -->
+                <p>{{item.quantity}}</p>
+                <p>${{item.unitPrice}}</p>
+                <p>${{item.totalPrice}}</p>
+              </div>
+              <hr />
+
+              <h3 class="line-items-total">
+                Total: ${{currentQuote.totalAmount}}
+              </h3>
+            </div>
+            <p>{{currentQuote.comments}}</p>
+
             <v-btn
               variant="outlined"
               rounded="lg"
@@ -218,15 +256,27 @@
               class="button"
               >Back</v-btn
             >
-            <h1>{{quotes._id}}</h1>
-            <h2>{{currentQuote.title}}</h2>
-            <div class="customer-information">
-              <h4>Customer Information:</h4>
-              <p>{{currentQuote.customer.name}}</p>
-              <p>{{currentQuote.customer.email}}</p>
-              <p>{{currentQuote.customer.phone}}</p>
-              <p>{{currentQuote.customer.address}}</p>
+
+            <!-- <div class="line-item-headers">
+              <h4>Product/Service</h4>
+              <h4>Qty</h4>
+              <h4>Unit Cost</h4>
+              <h4>Total</h4>
             </div>
+            <hr />
+            <div v-for="item in currentQuote.items" class="line-items">
+              <h4>{{item.name}}</h4> -->
+            <!-- <p>{{item.description}}</p>
+              <p>{{item.quantity}}</p>
+              <p>{{item.unitPrice}}</p>
+              <p>{{item.totalPrice}}</p>
+              <hr />
+            </div> -->
+            <!-- <h3>{{quotes._id}}</h3>
+            <h2>{{currentQuote.title}}</h2>
+            <hr />
+            
+            <hr />
 
             <p>{{currentQuote.description}}</p>
             <p>{{currentQuote.status}}</p>
@@ -237,9 +287,30 @@
               <p>{{item.quantity}}</p>
               <p>{{item.unitPrice}}</p>
               <p>{{item.totalPrice}}</p>
+              <hr />
             </div>
             <h1>${{currentQuote.totalAmount}}</h1>
             <p>{{currentQuote.comments}}</p>
+            <v-btn
+              variant="outlined"
+              rounded="lg"
+              size="x-large"
+              v-ripple
+              v-if="currentUser"
+              @click="setPage('home')"
+              class="button"
+              >Back</v-btn
+            >
+            <v-btn
+              variant="outlined"
+              rounded="lg"
+              size="x-large"
+              v-ripple
+              v-else="!currentUser"
+              @click="setPage('findQuote')"
+              class="button"
+              >Back</v-btn
+            > -->
           </div>
 
           <!-- NAV BAR -->
@@ -273,16 +344,6 @@
                 class="button"
                 >QUOTES</v-btn
               >
-              <v-btn
-                @click="setPage('stats')"
-                class="nav-button"
-                variant="tonal"
-                rounded="lg"
-                v-ripple
-                size="x-large"
-                class="button"
-                >COMPANY STATS</v-btn
-              >
             </div>
             <v-btn
               variant="tonal"
@@ -307,16 +368,6 @@
             <h1 v-if="currentUser" class="welcome-user">
               Welcome, {{currentUser.companyName}}!
             </h1>
-            <div class="calendar">
-              <iframe
-                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23039BE5&showTz=0&src=YzFlMzYzODk0YzljNzM1ZDA3ZmIyNjQ1NzBkMDQzMjg5ZGFiZTIyZjRlNDgyOGYwZTI1YmYyMzE4ZGJkNjIwYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
-                style="border-width: 0"
-                width="1000"
-                height="500"
-                frameborder="0"
-                scrolling="no"
-              ></iframe>
-            </div>
 
             <div @click="setPage('newQuote');editOff();" class="new-quote">
               <v-btn
@@ -357,6 +408,17 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <div class="calendar">
+              <iframe
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23039BE5&showTz=0&src=YzFlMzYzODk0YzljNzM1ZDA3ZmIyNjQ1NzBkMDQzMjg5ZGFiZTIyZjRlNDgyOGYwZTI1YmYyMzE4ZGJkNjIwYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
+                style="border-width: 0"
+                width="1000"
+                height="500"
+                frameborder="0"
+                scrolling="no"
+              ></iframe>
             </div>
           </div>
 
@@ -756,10 +818,6 @@
                 </div>
               </v-form>
             </div>
-          </div>
-          <!-- COMPANY STATS -->
-          <div v-if="currentPage === 'stats'">
-            <h2>Company Stats</h2>
           </div>
         </v-main>
       </v-app>
