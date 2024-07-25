@@ -534,6 +534,8 @@
                             :rules="rules"
                             label="quantity"
                             width="170px"
+                            type="number"
+                            @input="calculateTotalPrice(item); calculateTotalAmount();"
                           ></v-text-field>
                         </div>
                         <div class="item-container">
@@ -542,6 +544,8 @@
                             :rules="rules"
                             label="Unit Price"
                             width="170px"
+                            type="number"
+                            @input="calculateTotalPrice(item); calculateTotalAmount();"
                           ></v-text-field>
                         </div>
                       </div>
@@ -552,7 +556,7 @@
                           :rules="rules"
                           label="Total Price"
                         ></v-text-field>
-                        <!-- <p>{{calculateTotal(item.quantity, item.unitPrice)}}</p> -->
+                        <!-- <p>{{calculateTotalPrice(item)}}</p> -->
                       </div>
                       <v-btn @click="deleteItem(index)" class="button">X</v-btn>
                     </div>
@@ -686,6 +690,8 @@
                             :rules="rules"
                             label="quantity"
                             width="170px"
+                            type="number"
+                            @input="calculateTotalPrice(item); calculateTotalAmount();"
                           ></v-text-field>
                         </div>
                         <div class="item-container">
@@ -694,6 +700,8 @@
                             :rules="rules"
                             label="Unit Price"
                             width="170px"
+                            type="number"
+                            @input="calculateTotalPrice(item); calculateTotalAmount();"
                           ></v-text-field>
                         </div>
                       </div>
