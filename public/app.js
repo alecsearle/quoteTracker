@@ -289,20 +289,19 @@ Vue.createApp({
       this.clearQuote();
     },
     calculateTotalPrice: function (item) {
-      if (item.quantity && item.unitPrice){
-        item.totalPrice = item.quantity * item.unitPrice
+      if (item.quantity && item.unitPrice) {
+        item.totalPrice = item.quantity * item.unitPrice;
       } else {
         item.totalPrice = 0;
       }
-      
     },
     calculateTotalAmount: function () {
       let totalAmount = 0;
-      this.newItems.forEach(item => {
+      this.newItems.forEach((item) => {
         totalAmount += item.totalPrice;
       });
       this.newQuote.totalAmount = totalAmount;
-    }
+    },
   },
   computed: {
     filteredQuotes: function () {

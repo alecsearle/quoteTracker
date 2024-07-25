@@ -24,7 +24,7 @@ body {
   align-items: center;
   flex-direction: row;
   gap: 1rem;
-  width: 300px;
+  width: 348px;
   color: var(--mainBlue);
 }
 h2 {
@@ -97,19 +97,49 @@ nav {
 }
 
 /* CUSTOMER QUOTE PAGE */
+.line-items {
+  display: flex;
+  flex-direction: column;
+}
+.row-head,
+.row-body {
+  height: 60px;
+  display: grid;
+  grid-template-columns: 4fr 2fr 2fr 2fr;
+  align-items: center;
+}
+.line-items-total {
+  display: flex;
+  justify-content: end;
+  padding-right: 14%;
+}
+
 .customer-quote {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
+  padding-top: 2rem;
+}
+.line-item-headers {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.line-items {
+  padding-left: 5rem;
+  padding-right: 5rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
 }
 
 .customer-information {
   display: flex;
   width: 50%;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid black;
+  align-items: left;
 }
 
 /* NEW QUOTE PAGE */
@@ -118,19 +148,11 @@ nav {
   align-items: center;
   justify-content: center;
 }
-.customer-info {
-  background-color: beige;
-}
-.quote-info {
-  background-color: azure;
-}
+
 .item-pricing {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-.quote-total {
-  background-color: antiquewhite;
 }
 
 /* SEARCH */
