@@ -262,9 +262,24 @@ Vue.createApp({
       this.editingQuote = false;
       this.clearQuote();
     },
-    calculateTotal: function (quantity, unitPrice) {
-      return quantity * unitPrice;
+    // calculateTotal: function (quantity, unitPrice) {
+    //   return quantity * unitPrice;
+    // },
+    calculateTotalPrice: function (item) {
+      if (item.quantity && item.unitPrice){
+        item.totalPrice = item.quantity * item.unitPrice
+      } else {
+        item.totalPrice = 0;
+      }
+      
     },
+    calculateTotalAmount: function () {
+      let totalAmount = 0;
+      this.newItems.forEach(item => {
+        totalAmount += item.totalPrice;
+      });
+      this.newQuote.totalAmount = totalAmount;
+    }
   },
   computed: {
     balance: function () {
