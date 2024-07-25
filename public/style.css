@@ -105,13 +105,13 @@ nav {
 .row-body {
   height: 60px;
   display: grid;
-  grid-template-columns: 4fr 2fr 2fr 2fr;
+  grid-template-columns: 3fr 3fr 2fr 2fr 2fr;
   align-items: center;
 }
 .line-items-total {
   display: flex;
   justify-content: end;
-  padding-right: 14%;
+  padding-right: 8%;
 }
 
 .customer-quote {
