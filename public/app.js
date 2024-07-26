@@ -182,7 +182,7 @@ Vue.createApp({
         console.log("successfully created a quote");
         console.log("id BEFORE calling sendMail()", this.quotes[0]._id);
         // this.saveQuote();
-        // this.sendMail(data);
+         this.sendMail(data);
         //make sure to uncomment this out
       } else {
         console.log("failed to create a quote");

@@ -331,6 +331,7 @@
                 <div
                   v-if="quote.owner === currentUser.companyID"
                   class="quote-thumbnail"
+                  id="zoom"
                   @click.stop="getQuote(quote._id)"
                 >
                   <div @click="setPage('customerQuote')">
@@ -421,6 +422,7 @@
                 <div
                   v-if="quote.owner === currentUser.companyID"
                   class="quote-thumbnail"
+                  id="zoom"
                   @click.stop="getQuote(quote._id)"
                 >
                   <div @click="setPage('customerQuote')">
