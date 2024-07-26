@@ -1,6 +1,6 @@
 :root {
   --mainBlue: #1f7aab;
-  --hover: #d7bf8b;
+  --hover: #1f7aab;
   /* 45446D */
   /* cream:d7bf8b */
 }
@@ -179,4 +179,28 @@ nav {
 
 .clear-search {
   height: 55px !important;
+}
+
+.edit-delete {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.delete-btn {
+  border: black solid 1px;
+  padding: 0.3rem;
+}
+.edit-btn {
+  border: black solid 1px;
+  padding: 0.3rem;
+}
+
+.delete-btn:hover {
+  color: white;
+  background-color: rgb(227, 45, 45);
+}
+
+.edit-btn:hover {
+  color: white;
+  background-color: rgb(223, 145, 0);
 }

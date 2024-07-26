@@ -41,6 +41,7 @@ Vue.createApp({
         },
       ],
       searchInput: "",
+      searchStatusInput: "",
       editingQuote: false,
       quotes: [],
       deletedQuotes: [],
@@ -77,6 +78,12 @@ Vue.createApp({
           console.log("after sending", this.quotes[0]._id);
         });
     },
+
+    // quoteStatusAR: function () {
+    //   this.searchStatusInput = "awaiting response";
+    //   console.log("button activated");
+    //   console.log(this.searchStatusInput);
+    // },
 
     createItem: function () {
       this.newItems.push({
