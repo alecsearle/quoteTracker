@@ -327,7 +327,7 @@
             </div>
             <h2>Recent Quotes</h2>
             <div class="thumbnails">
-              <div v-for="quote in quotes.slice(0,3)">
+              <div v-for="quote in quotes.slice(0,4)">
                 <div
                   v-if="quote.owner === currentUser.companyID"
                   class="quote-thumbnail"
@@ -343,11 +343,13 @@
                     <h3>{{quote.status}}</h3>
                   </div>
 
-                  <div class="edit_delete">
-                    <button @click.stop="editQuote(quote)">Edit</button>
+                  <div class="edit-delete">
+                    <button @click.stop="editQuote(quote)" class="edit-btn">
+                      Edit
+                    </button>
                     <button
                       @click.stop="deleteQuote(quote._id)"
-                      id="delete_button"
+                      class="delete-btn"
                     >
                       Delete
                     </button>
@@ -358,10 +360,10 @@
 
             <div class="calendar">
               <iframe
-                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23039BE5&showTz=0&src=YzFlMzYzODk0YzljNzM1ZDA3ZmIyNjQ1NzBkMDQzMjg5ZGFiZTIyZjRlNDgyOGYwZTI1YmYyMzE4ZGJkNjIwYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23D81B60"
-                style="border-width: 0"
-                width="1000"
-                height="500"
+                src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FDenver&bgcolor=%23B39DDB&src=c2VhcmxlLmFsZWNAZ21haWwuY29t&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=YzFlMzYzODk0YzljNzM1ZDA3ZmIyNjQ1NzBkMDQzMjg5ZGFiZTIyZjRlNDgyOGYwZTI1YmYyMzE4ZGJkNjIwYUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%237986CB&color=%237986CB&color=%23B39DDB&color=%237986CB"
+                style="border: solid 1px #777"
+                width="800"
+                height="600"
                 frameborder="0"
                 scrolling="no"
               ></iframe>
@@ -433,13 +435,16 @@
                     <h3>{{quote.status}}</h3>
                   </div>
 
-                  <div class="edit_delete">
-                    <button @click.stop="editQuote(quote);setPage('editPage');">
+                  <div class="edit-delete">
+                    <button
+                      @click.stop="editQuote(quote);setPage('editPage');"
+                      class="edit-btn"
+                    >
                       Edit
                     </button>
                     <button
                       @click.stop="deleteQuote(quote._id)"
-                      id="delete_button"
+                      class="delete-btn"
                     >
                       Delete
                     </button>
