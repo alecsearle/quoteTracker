@@ -1,4 +1,6 @@
 const URL = "http://localhost:8080";
+// EMAIL.JS
+// https://dashboard.emailjs.com/admin/templates/jkyzi14
 
 Vue.createApp({
   data() {
